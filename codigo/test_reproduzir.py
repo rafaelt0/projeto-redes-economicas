@@ -11,8 +11,8 @@ SPEC.loader.exec_module(reproduzir)
 class Comparacao(unittest.TestCase):
     def comparar(self, referencia, gerado, nome='t.csv'):
         with tempfile.TemporaryDirectory() as a, tempfile.TemporaryDirectory() as b:
-            (Path(a) / nome).write_text(referencia, encoding='utf-8')
-            (Path(b) / nome).write_text(gerado, encoding='utf-8')
+            (Path(a) / nome).write_text(referencia, encoding='utf-8', newline='')
+            (Path(b) / nome).write_text(gerado, encoding='utf-8', newline='')
             return reproduzir.comparar(Path(a), Path(b), [nome])
 
     def test_diferenca_no_12o_digito_passa(self):
