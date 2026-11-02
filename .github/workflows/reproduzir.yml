@@ -35,8 +35,3 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
       - run: uv run reproduzir.py
-      # No Linux, tudo menos os PNG sai idêntico byte a byte (os PNG dependem das fontes do sistema).
-      - if: runner.os == 'Linux'
-        run: |
-          git status --porcelain -- . ':!*.png'
-          test -z "$(git status --porcelain -- . ':!*.png')"

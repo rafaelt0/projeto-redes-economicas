@@ -90,23 +90,24 @@ def valor(texto):
         return texto
 
 
-def diferenca(a, b, onde=''):
-    """None se iguais (números com tolerância relativa, o resto exato); senão, onde diferem."""
+def diferencas(a, b, onde=''):
+    """Cada ponto em que diferem: números com tolerância relativa, o resto exato."""
     if isinstance(a, dict) and isinstance(b, dict):
         if a.keys() != b.keys():
-            return f'{onde}: chaves {sorted(a.keys() ^ b.keys())}'
-        return next((d for k in a if not k.startswith('sha256') and (d := diferenca(a[k], b[k], f'{onde}/{k}'))),
-            None)
-    if isinstance(a, list) and isinstance(b, list):
+            yield f'{onde}: chaves {sorted(a.keys() ^ b.keys())}'
+        for k in a.keys() & b.keys():
+            if not k.startswith('sha256'):
+                yield from diferencas(a[k], b[k], f'{onde}/{k}')
+    elif isinstance(a, list) and isinstance(b, list):
         if len(a) != len(b):
-            return f'{onde}: {len(a)} itens no repositório, {len(b)} gerados'
-        return next((d for i, (x, y) in enumerate(zip(a, b)) if (d := diferenca(x, y, f'{onde}[{i}]'))), None)
-    numeros = all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in (a, b))
-    if numeros and (math.isclose(a, b, rel_tol=TOLERANCIA, abs_tol=1e-12) or (math.isnan(a) and math.isnan(b))):
-        return None
-    if not numeros and a == b:
-        return None
-    return f'{onde}: {a!r} no repositório, {b!r} gerado'
+            yield f'{onde}: {len(a)} itens no repositório, {len(b)} gerados'
+        for i, (x, y) in enumerate(zip(a, b)):
+            yield from diferencas(x, y, f'{onde}[{i}]')
+    elif all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in (a, b)):
+        if not (math.isclose(a, b, rel_tol=TOLERANCIA, abs_tol=1e-12) or (math.isnan(a) and math.isnan(b))):
+            yield f'{onde}: {a!r} no repositório, {b!r} gerado'
+    elif a != b:
+        yield f'{onde}: {a!r} no repositório, {b!r} gerado'
 
 
 def ler(caminho):
@@ -125,8 +126,8 @@ def comparar(referencia, gerado, arquivos):
         ref, novo = referencia / nome, gerado / nome
         if not novo.exists():
             diferentes.append(f'{nome}: não foi gerado')
-        elif d := diferenca(ler(ref), ler(novo)):
-            diferentes.append(f'{nome} {d}')
+        elif lista := sorted(diferencas(ler(ref), ler(novo))):
+            diferentes.append(f'{nome} ({len(lista)} diferenças): ' + '; '.join(lista[:5]))
     return diferentes
 
 
