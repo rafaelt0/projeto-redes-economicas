@@ -1,0 +1,262 @@
+{
+  "perfis": [
+    {
+      "categoria": "mantem_ambos",
+      "tempo": -3,
+      "taxa_pct": 56.30576871578109,
+      "ic95_inf_pct": 55.693703952745274,
+      "ic95_sup_pct": 56.85503793976516,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": -2,
+      "taxa_pct": 55.136457918895076,
+      "ic95_inf_pct": 54.63401538978261,
+      "ic95_sup_pct": 55.63086758294437,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": -1,
+      "taxa_pct": 55.340845708455575,
+      "ic95_inf_pct": 54.781374504127925,
+      "ic95_sup_pct": 55.88042382794325,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": 0,
+      "taxa_pct": 56.379933763591175,
+      "ic95_inf_pct": 55.79925959982231,
+      "ic95_sup_pct": 56.92663499889673,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": 1,
+      "taxa_pct": 58.84561827819614,
+      "ic95_inf_pct": 58.289386935281314,
+      "ic95_sup_pct": 59.388938055754146,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": 2,
+      "taxa_pct": 56.640213097159965,
+      "ic95_inf_pct": 56.12182223506799,
+      "ic95_sup_pct": 57.16191317786479,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "mantem_ambos",
+      "tempo": 3,
+      "taxa_pct": 54.37079722745865,
+      "ic95_inf_pct": 53.703208269232064,
+      "ic95_sup_pct": 55.01880771402604,
+      "n_municipio_eleicoes": 385
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": -3,
+      "taxa_pct": 56.47520643858317,
+      "ic95_inf_pct": 56.06314526714906,
+      "ic95_sup_pct": 56.84431535172737,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": -2,
+      "taxa_pct": 55.478903602151995,
+      "ic95_inf_pct": 55.11611503477704,
+      "ic95_sup_pct": 55.841731186675446,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": -1,
+      "taxa_pct": 55.07487747791393,
+      "ic95_inf_pct": 54.63698469479341,
+      "ic95_sup_pct": 55.467270945170974,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": 0,
+      "taxa_pct": 50.112489432965845,
+      "ic95_inf_pct": 49.527331749096724,
+      "ic95_sup_pct": 50.655848229791964,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": 1,
+      "taxa_pct": 56.59524050092535,
+      "ic95_inf_pct": 56.17618189939157,
+      "ic95_sup_pct": 56.97310550729847,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": 2,
+      "taxa_pct": 55.23643501556534,
+      "ic95_inf_pct": 54.88321158006217,
+      "ic95_sup_pct": 55.59826669325687,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_ambos",
+      "tempo": 3,
+      "taxa_pct": 53.33954960888503,
+      "ic95_inf_pct": 52.92289541451019,
+      "ic95_sup_pct": 53.74001037546383,
+      "n_municipio_eleicoes": 1132
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": -3,
+      "taxa_pct": 56.04069331053352,
+      "ic95_inf_pct": 55.00137954325027,
+      "ic95_sup_pct": 57.035122038545,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": -2,
+      "taxa_pct": 55.834490286424675,
+      "ic95_inf_pct": 54.84872213914061,
+      "ic95_sup_pct": 56.783339526181884,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": -1,
+      "taxa_pct": 54.681267661959595,
+      "ic95_inf_pct": 53.62573638992967,
+      "ic95_sup_pct": 55.747811499170595,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": 0,
+      "taxa_pct": 56.50311520895178,
+      "ic95_inf_pct": 55.38028814933954,
+      "ic95_sup_pct": 57.56613461528579,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": 1,
+      "taxa_pct": 58.90565776237039,
+      "ic95_inf_pct": 57.788707376518985,
+      "ic95_sup_pct": 59.99840032653354,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": 2,
+      "taxa_pct": 57.007051336643976,
+      "ic95_inf_pct": 55.87102480795678,
+      "ic95_sup_pct": 58.12285501549075,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_partido",
+      "tempo": 3,
+      "taxa_pct": 52.58086225315104,
+      "ic95_inf_pct": 50.675362058479536,
+      "ic95_sup_pct": 54.17843266405203,
+      "n_municipio_eleicoes": 97
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": -3,
+      "taxa_pct": 58.208958239448485,
+      "ic95_inf_pct": 57.349135148832055,
+      "ic95_sup_pct": 59.03774197760574,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": -2,
+      "taxa_pct": 57.147814097121454,
+      "ic95_inf_pct": 56.39267699174057,
+      "ic95_sup_pct": 57.929323183791716,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": -1,
+      "taxa_pct": 56.745620286655885,
+      "ic95_inf_pct": 55.785126784677765,
+      "ic95_sup_pct": 57.61753974234988,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": 0,
+      "taxa_pct": 55.70395792338925,
+      "ic95_inf_pct": 54.594440662811586,
+      "ic95_sup_pct": 56.82808546289241,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": 1,
+      "taxa_pct": 58.46389691959737,
+      "ic95_inf_pct": 57.58125734511581,
+      "ic95_sup_pct": 59.34478528959548,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": 2,
+      "taxa_pct": 57.00053041793575,
+      "ic95_inf_pct": 56.17651887006233,
+      "ic95_sup_pct": 57.84280392549006,
+      "n_municipio_eleicoes": 129
+    },
+    {
+      "categoria": "muda_prefeito",
+      "tempo": 3,
+      "taxa_pct": 55.20932241720759,
+      "ic95_inf_pct": 53.98212841180637,
+      "ic95_sup_pct": 56.36910118500788,
+      "n_municipio_eleicoes": 129
+    }
+  ],
+  "saltos": [
+    {
+      "categoria": "mantem_ambos",
+      "delta_pp": 0.7855763158806021,
+      "ic95_inf_pp": 0.3385837295396108,
+      "ic95_sup_pp": 1.2219319899518406
+    },
+    {
+      "categoria": "muda_ambos",
+      "delta_pp": -5.563839739917173,
+      "ic95_inf_pp": -6.006732642134504,
+      "ic95_sup_pp": -5.127036069541903
+    },
+    {
+      "categoria": "muda_partido",
+      "delta_pp": 0.9842981226458474,
+      "ic95_inf_pp": 0.25650382736565,
+      "ic95_sup_pp": 1.7181008462785035
+    },
+    {
+      "categoria": "muda_prefeito",
+      "delta_pp": -1.663506284352658,
+      "ic95_inf_pp": -2.527765490912692,
+      "ic95_sup_pp": -0.7461668270366968
+    }
+  ],
+  "contraste_sucessao": {
+    "estimativa_pp": -3.900333455564514,
+    "ic95_inf_pp": -4.931095467679188,
+    "ic95_sup_pp": -2.9039538324938907
+  },
+  "replicas": 1999,
+  "sha256_fonte": "8182817671f86bc35bcf2d6d1e079b877ec01fb01958a4b0bb8829c043b870f7",
+  "descricao": "Taxa anual; cada município-eleição com mesmo peso. Janelas sobrepostas, agrupamento municipal. Não causal."
+}

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Persistência da rede prefeitura-fornecedor | Redes Econômicas e Sociais</title>
+<style>
+  :root { --gap: 14px; }
+  :root {
+    --d-background: #f8fafc;
+    --d-foreground: #0f172a;
+    --d-muted-foreground: #64748b;
+    --d-card: #ffffff;
+    --d-card-foreground: #0f172a;
+    --d-border: #e2e8f0;
+    --d-accent: #2563eb;
+    --d-accent-surface: #eff6ff;
+    --d-accent-surface-foreground: #1e3a8a;
+    --d-success: #059669;
+    --d-warning: #d97706;
+    --d-chart-1: #2563eb;
+    --d-chart-2: #0f766e;
+    --d-radius: 10px;
+    --d-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --d-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --d-background: #0b0b0d;
+      --d-foreground: #f1f5f9;
+      --d-muted-foreground: #94a3b8;
+      --d-card: #141418;
+      --d-card-foreground: #f1f5f9;
+      --d-border: #2a2a31;
+      --d-accent: #60a5fa;
+      --d-accent-surface: #172554;
+      --d-accent-surface-foreground: #dbeafe;
+      --d-success: #34d399;
+      --d-warning: #fbbf24;
+      --d-chart-1: #2563eb;
+      --d-chart-2: #0f766e;
+    }
+  }
+  html { background: var(--d-background); color-scheme: light dark; }
+  .pagina { max-width: 780px; margin: 0 auto; padding: 36px 20px 48px; }
+  .titulo { font-size: 26px; line-height: 1.25; margin: 0 0 6px; }
+  .subtitulo { color: var(--d-muted-foreground); margin: 0 0 30px; font-size: 14px; }
+  * { box-sizing: border-box; }
+  body { font-family: var(--d-font-sans); color: var(--d-foreground); background: var(--d-background); margin: 0; line-height: 1.45; font-size: 14px; }
+  .sec { margin: 0 0 22px; }
+  .rotulo { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--d-muted-foreground); margin: 0 0 10px; font-weight: 600; }
+  .pergunta { font-size: 21px; line-height: 1.3; font-weight: 600; margin: 0 0 8px; }
+  .hipotese { color: var(--d-muted-foreground); margin: 0; font-size: 14.5px; }
+  .hipotese b { color: var(--d-foreground); font-weight: 600; }
+  .card { background: var(--d-card); color: var(--d-card-foreground); border: 1px solid var(--d-border); border-radius: var(--d-radius); padding: 12px 14px; }
+  .card h3 { margin: 0 0 4px; font-size: 14px; }
+  .card p { margin: 0; color: var(--d-muted-foreground); font-size: 13px; }
+  .tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+  .sintese { margin-top: 10px; text-align: center; padding: 10px 14px; border-radius: var(--d-radius); background: var(--d-accent-surface); color: var(--d-accent-surface-foreground); font-weight: 500; }
+  .fluxo { display: grid; grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr; align-items: stretch; }
+  .seta { display: flex; align-items: center; justify-content: center; color: var(--d-muted-foreground); font-size: 16px; }
+  .fluxo .card h3 { font-size: 13.5px; }
+  .fluxo .card ul { margin: 6px 0 0; padding-left: 16px; color: var(--d-muted-foreground); font-size: 12.5px; }
+  .fluxo .card li { margin: 2px 0; }
+  .etapa { font-size: 11px; color: var(--d-muted-foreground); font-family: var(--d-font-mono); }
+  .rede { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+  .rede .card { padding: 10px 10px 6px; }
+  .rede h3 { font-size: 13px; text-align: center; margin-bottom: 0; }
+  svg { width: 100%; height: auto; display: block; }
+  .legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--d-muted-foreground); margin-top: 10px; }
+  .legenda span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .ln { width: 22px; height: 0; border-top: 2px solid var(--d-foreground); display: inline-block; }
+  .nota { font-size: 13px; color: var(--d-muted-foreground); margin: 8px 0 0; }
+  .linha-tempo { position: relative; margin-top: 26px; }
+  .mandatos { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .mandato { border: 1px solid var(--d-border); background: var(--d-card); padding: 8px 6px; text-align: center; font-size: 12.5px; }
+  .mandato:first-child { border-radius: var(--d-radius) 0 0 var(--d-radius); }
+  .mandato:last-child { border-radius: 0 var(--d-radius) var(--d-radius) 0; }
+  .eleicao.inicio { transform: none; text-align: left; }
+  .eleicao.inicio i { margin-left: 0; }
+  .eleicao.fim { transform: translateX(-100%); text-align: right; }
+  .eleicao.fim i { margin-right: 0; }
+  .mandato + .mandato { border-left: none; }
+  .mandato b { display: block; font-size: 13px; }
+  .eleicao { position: absolute; top: -24px; transform: translateX(-50%); font-size: 11.5px; font-family: var(--d-font-mono); text-align: center; white-space: nowrap; }
+  .eleicao i { display: block; width: 2px; height: 10px; margin: 2px auto 0; background: var(--d-muted-foreground); }
+  .eleicao.ativa { color: var(--d-accent); font-weight: 600; }
+  .eleicao.ativa i { background: var(--d-accent); width: 3px; }
+  .funil { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .funil td { padding: 5px 8px; border-bottom: 1px solid var(--d-border); vertical-align: top; }
+  .funil td.n { text-align: right; font-family: var(--d-font-mono); white-space: nowrap; font-size: 12.5px; }
+  .funil tr.menos td.n { color: var(--d-muted-foreground); }
+  .funil tr.total td { font-weight: 600; border-bottom: none; background: var(--d-accent-surface); color: var(--d-accent-surface-foreground); }
+  .funil tr.topo td { font-weight: 600; }
+  .resumo { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+  .resumo div { text-align: center; }
+  .resumo b { display: block; font-size: 18px; font-family: var(--d-font-mono); }
+  .resumo small { color: var(--d-muted-foreground); font-size: 12px; }
+  .dois { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+  .lista { margin: 0; padding: 0; list-style: none; }
+  .lista li { padding: 7px 0; border-bottom: 1px solid var(--d-border); font-size: 13px; }
+  .lista li:last-child { border-bottom: none; }
+  .lista b { font-weight: 600; }
+  .lista span { color: var(--d-muted-foreground); }
+  .lista .ok { color: var(--d-success); font-weight: 700; margin-right: 6px; }
+  .lista .prox { color: var(--d-warning); font-weight: 700; margin-right: 6px; }
+  @media (max-width: 600px) {
+    .tres, .rede, .dois, .resumo { grid-template-columns: 1fr 1fr; }
+    .tres { grid-template-columns: 1fr; }
+    .rede, .dois { grid-template-columns: 1fr; }
+    .fluxo { grid-template-columns: 1fr; }
+    .seta { transform: rotate(90deg); height: 20px; }
+    .pergunta { font-size: 18px; }
+    .mandato { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<main class="pagina">
+<h1 class="titulo">Persistência da rede prefeitura-fornecedor depois da troca de prefeito</h1>
+<p class="subtitulo">Trabalho da disciplina Redes Econômicas e Sociais. Plano e andamento em outubro de 2026.</p>
+
+<div class="sec">
+  <p class="rotulo">Pergunta de pesquisa</p>
+  <p class="pergunta">A rede que liga empresas às prefeituras sobrevive quando muda o prefeito?</p>
+  <p class="hipotese">Hipótese: <b>fornecedores que fazem ponte entre prefeituras de partidos diferentes</b> continuam vendendo depois da troca com mais frequência do que os fornecedores ligados a um só grupo político.</p>
+</div>
+
+<div class="sec">
+  <p class="rotulo">De onde vem a ideia</p>
+  <div class="tres">
+    <div class="card"><h3>North</h3><p>Instituições são as regras do jogo e tendem a persistir por dependência da trajetória.</p></div>
+    <div class="card"><h3>Acemoglu e Robinson</h3><p>Quando o poder formal (de jure) muda, as elites podem manter o poder de fato (de facto).</p></div>
+    <div class="card"><h3>Jackson</h3><p>A posição na rede, como centralidade e intermediação, muda o que cada agente consegue.</p></div>
+  </div>
+  <div class="sintese">As três juntas sugerem que parte do poder de fato vem da rede de relações econômicas, e por isso pode sobreviver à troca do governo.</div>
+</div>
+
+<div class="sec">
+  <p class="rotulo">Como o trabalho é feito</p>
+  <div class="fluxo">
+    <div class="card"><div class="etapa">1 · dados</div><h3>Três fontes públicas</h3>
+      <ul><li>TCESP: cada empenho, com o CNPJ do fornecedor (2009 a 2024)</li><li>TSE: quem venceu cada eleição municipal</li><li>Receita: tipo jurídico e ramo (CNAE) de cada empresa</li></ul></div>
+    <div class="seta">→</div>
+    <div class="card"><div class="etapa">2 · limpeza</div><h3>Só escolhas do prefeito</h3>
+      <ul><li>só a prefeitura, só empresas</li><li>sem folha, estatais, concessionárias e bancos</li><li>cópias contadas uma vez</li></ul></div>
+    <div class="seta">→</div>
+    <div class="card"><div class="etapa">3 · rede</div><h3>Rede bipartida</h3>
+      <ul><li>nós: prefeituras e empresas</li><li>ligação: a prefeitura empenhou para a empresa no mandato</li><li>ponte: a empresa atende prefeituras de partidos diferentes</li></ul></div>
+    <div class="seta">→</div>
+    <div class="card"><div class="etapa">4 · análise</div><h3>Comparar mandatos</h3>
+      <ul><li>quantos fornecedores continuam depois da troca de partido no poder</li><li>alternância contra continuidade</li><li>ponte, controlando nº de clientes e setor</li></ul></div>
+  </div>
+</div>
+
+<div class="sec">
+  <p class="rotulo">O que a hipótese prevê na rede</p>
+  <div class="rede">
+    <div class="card"><h3>Mandato antes da eleição</h3>
+      <svg viewBox="0 0 320 210" role="img" aria-label="Rede antes da troca">
+        <g stroke-width="2" fill="none">
+          <line x1="60" y1="48" x2="40" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="60" y1="48" x2="110" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="60" y1="48" x2="180" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="160" y1="48" x2="110" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="160" y1="48" x2="250" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="260" y1="48" x2="180" y2="160" style="stroke: var(--d-foreground)"/>
+        </g>
+        <g font-size="12" font-weight="600" text-anchor="middle">
+          <rect x="38" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-1)"/><text x="60" y="53" style="fill: #ffffff">P1</text>
+          <rect x="138" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-2)"/><text x="160" y="53" style="fill: #ffffff">P2</text>
+          <rect x="238" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-1)"/><text x="260" y="53" style="fill: #ffffff">P3</text>
+          <circle cx="40" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="40" y="172" style="fill: var(--d-foreground)">E1</text>
+          <circle cx="110" cy="168" r="19" style="fill: none; stroke: var(--d-accent)" stroke-width="2" stroke-dasharray="3 3"/>
+          <circle cx="110" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="110" y="172" style="fill: var(--d-foreground)">E2</text>
+          <circle cx="180" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="180" y="172" style="fill: var(--d-foreground)">E4</text>
+          <circle cx="250" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="250" y="172" style="fill: var(--d-foreground)">E3</text>
+        </g>
+        <text x="110" y="203" font-size="11" text-anchor="middle" style="fill: var(--d-accent)">ponte entre A e B</text>
+        <text x="60" y="20" font-size="11" text-anchor="middle" style="fill: var(--d-muted-foreground)">partido A</text>
+      </svg>
+    </div>
+    <div class="card"><h3>Depois: P1 passa do partido A para o B</h3>
+      <svg viewBox="0 0 320 210" role="img" aria-label="Rede depois da troca">
+        <g stroke-width="2" fill="none">
+          <line x1="60" y1="48" x2="40" y2="160" style="stroke: var(--d-muted-foreground)" stroke-dasharray="5 5" opacity=".55"/>
+          <line x1="60" y1="48" x2="110" y2="160" style="stroke: var(--d-foreground)" stroke-width="3"/>
+          <line x1="60" y1="48" x2="180" y2="160" style="stroke: var(--d-muted-foreground)" stroke-dasharray="5 5" opacity=".55"/>
+          <line x1="60" y1="48" x2="300" y2="160" style="stroke: var(--d-success)"/>
+          <line x1="160" y1="48" x2="110" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="160" y1="48" x2="250" y2="160" style="stroke: var(--d-foreground)"/>
+          <line x1="260" y1="48" x2="180" y2="160" style="stroke: var(--d-foreground)"/>
+        </g>
+        <g font-size="12" font-weight="600" text-anchor="middle">
+          <rect x="38" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-2)"/><text x="60" y="53" style="fill: #ffffff">P1</text>
+          <rect x="138" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-2)"/><text x="160" y="53" style="fill: #ffffff">P2</text>
+          <rect x="238" y="30" width="44" height="36" rx="6" style="fill: var(--d-chart-1)"/><text x="260" y="53" style="fill: #ffffff">P3</text>
+          <circle cx="40" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-muted-foreground)" stroke-width="1.5" opacity=".6"/><text x="40" y="172" style="fill: var(--d-muted-foreground)">E1</text>
+          <circle cx="110" cy="168" r="19" style="fill: none; stroke: var(--d-accent)" stroke-width="2" stroke-dasharray="3 3"/>
+          <circle cx="110" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="110" y="172" style="fill: var(--d-foreground)">E2</text>
+          <circle cx="180" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="180" y="172" style="fill: var(--d-foreground)">E4</text>
+          <circle cx="250" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-foreground)" stroke-width="1.5"/><text x="250" y="172" style="fill: var(--d-foreground)">E3</text>
+          <circle cx="300" cy="168" r="15" style="fill: var(--d-card); stroke: var(--d-success)" stroke-width="2"/><text x="300" y="172" style="fill: var(--d-success)">E5</text>
+        </g>
+        <text x="110" y="203" font-size="11" text-anchor="middle" style="fill: var(--d-accent)">E2 continua</text>
+        <text x="60" y="20" font-size="11" text-anchor="middle" style="fill: var(--d-muted-foreground)">partido B</text>
+      </svg>
+    </div>
+  </div>
+  <div class="legenda">
+    <span><i class="sw" style="background: var(--d-chart-1)"></i>prefeitura do partido A</span>
+    <span><i class="sw" style="background: var(--d-chart-2)"></i>prefeitura do partido B</span>
+    <span><i class="ln"></i>relação mantida</span>
+    <span><i class="ln" style="border-top-style: dashed; border-color: var(--d-muted-foreground)"></i>relação perdida</span>
+    <span><i class="ln" style="border-color: var(--d-success)"></i>fornecedor novo</span>
+  </div>
+  <p class="nota">E1 e E4 só atendem prefeituras do partido A e perdem o contrato com P1. E2 já atendia os dois partidos e continua. O trabalho mede com que frequência isso acontece nos 644 municípios.</p>
+</div>
+
+<div class="sec">
+  <p class="rotulo">Quais trocas de prefeito entram na comparação</p>
+  <div class="linha-tempo">
+    <div class="eleicao inicio" style="left: 0%">2008<i></i></div>
+    <div class="eleicao ativa" style="left: 25%">2012<i></i></div>
+    <div class="eleicao ativa" style="left: 50%">2016<i></i></div>
+    <div class="eleicao ativa" style="left: 75%">2020<i></i></div>
+    <div class="eleicao fim" style="left: 100%">2024<i></i></div>
+    <div class="mandatos">
+    <div class="mandato"><b>2009 a 2012</b>mandato</div>
+    <div class="mandato"><b>2013 a 2016</b>mandato</div>
+    <div class="mandato"><b>2017 a 2020</b>mandato</div>
+    <div class="mandato"><b>2021 a 2024</b>mandato</div>
+    </div>
+  </div>
+  <p class="nota">Cada eleição destacada separa um mandato completo antes e outro depois, nos cerca de 640 municípios. Isso dá 3 transições. A eleição de 2024 fica de fora porque só existe 2025 depois dela. As eleições apertadas servem como teste de robustez.</p>
+</div>
+
+<div class="sec">
+  <p class="rotulo">Limpeza de 2012, já feita e conferida</p>
+  <table class="funil">
+    <tr class="topo"><td>Linhas no arquivo do TCESP</td><td class="n">22.825.732</td></tr>
+    <tr class="topo"><td>Agrupadas em empenhos por número e fornecedor (9.274 cópias removidas)</td><td class="n">6.435.535</td></tr>
+    <tr class="menos"><td>Câmara, autarquias, fundos e fundações</td><td class="n">− 693.322</td></tr>
+    <tr class="menos"><td>Fornecedor não é empresa (pessoa física, folha, inscrições genéricas)</td><td class="n">− 2.038.740</td></tr>
+    <tr class="menos"><td>Fora de custeio e investimento (pessoal, dívida)</td><td class="n">− 291.178</td></tr>
+    <tr class="menos"><td>Subvenções, consórcios e repasses internos</td><td class="n">− 63.850</td></tr>
+    <tr class="menos"><td>Órgãos públicos e estatais</td><td class="n">− 152.893</td></tr>
+    <tr class="menos"><td>Concessionárias de energia, água e telefonia, e bancos</td><td class="n">− 388.840</td></tr>
+    <tr class="menos"><td>Valor líquido zero ou negativo, CNPJ inválido e outros</td><td class="n">− 135.243</td></tr>
+    <tr class="total"><td>Empenhos que formam a rede</td><td class="n">2.671.469</td></tr>
+  </table>
+  <div class="resumo">
+    <div><b>644</b><small>prefeituras</small></div>
+    <div><b>143.361</b><small>empresas</small></div>
+    <div><b>334.912</b><small>ligações</small></div>
+    <div><b>R$ 27,2 bi</b><small>empenhados</small></div>
+  </div>
+  <p class="nota">Conferido contra contagens feitas direto no arquivo bruto (Adamantina e Monte Mor). Duas rodadas do script deram resultados idênticos.</p>
+</div>
+
+<div class="sec">
+  <div class="dois">
+    <div>
+      <p class="rotulo">Cuidados na interpretação</p>
+      <ul class="lista">
+        <li><b>Continuar não é favorecimento.</b> <span>Uma empresa pode continuar porque é a única da cidade ou porque tem contrato longo.</span></li>
+        <li><b>Sumir pode ser fechar.</b> <span>26% das empresas de 2012 estão fechadas hoje. É preciso separar quem fechou de quem perdeu o contrato.</span></li>
+        <li><b>Ponte se confunde com tamanho.</b> <span>Empresa grande atende todo mundo. Por isso o trabalho controla número de clientes e setor.</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="rotulo">Andamento</p>
+      <ul class="lista">
+        <li><span class="ok">✓</span>Pergunta, hipótese e desenho definidos</li>
+        <li><span class="ok">✓</span>Fontes de dados verificadas</li>
+        <li><span class="ok">✓</span>Ano de 2012 limpo e conferido</li>
+        <li><span class="prox">→</span>Limpar 2009 a 2024 <span>(o formato muda entre 2014 e 2017)</span></li>
+        <li><span class="prox">→</span>Juntar o TSE e marcar as trocas de partido</li>
+        <li><span class="prox">→</span>Calcular as medidas de rede e comparar</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

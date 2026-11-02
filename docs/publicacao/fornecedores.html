@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quem são os fornecedores das prefeituras paulistas?</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --surface-0: #f4f3f0; --surface-1: #fcfcfb; --border: #e2e1dc; --grid: #ebeae6;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --neutral: #9a9994;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2c; --grid: #262624;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --neutral: #6f6e69;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--surface-0); color: var(--text-primary);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 32px 20px 40px; }
+main { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; }
+h2 { font-size: 18px; margin: 0 0 4px; }
+.sub { color: var(--text-secondary); margin: 0 0 20px; }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.tile, .card, .resumo { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+.tile { padding: 14px 16px; }
+.tile .lab { font-size: 13px; color: var(--text-secondary); }
+.tile .num { font-size: 28px; font-weight: 650; font-variant-numeric: tabular-nums; margin: 2px 0; }
+.tile .ci { font-size: 12.5px; color: var(--text-muted); }
+.resumo { padding: 14px 18px; margin-bottom: 16px; }
+.resumo ul { margin: 6px 0 0; padding-left: 20px; }
+.resumo li { margin: 3px 0; }
+.card { padding: 18px 20px; margin-bottom: 16px; }
+.card p.lead { color: var(--text-secondary); margin: 0 0 12px; font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--text-secondary); margin: 4px 0 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { fill: var(--text-secondary); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+svg .strong { fill: var(--text-primary); font-weight: 600; }
+svg .muted { fill: var(--text-muted); }
+svg .head { fill: var(--text-primary); font-weight: 600; font-size: 13px; }
+.gridline { stroke: var(--grid); }
+.note { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 13px; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-secondary); font-weight: 600; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+.cav { border-left: 3px solid var(--neutral); padding: 10px 14px; background: var(--surface-1); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--text-secondary); }
+#tip { position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 10px; font-size: 12.5px; box-shadow: 0 4px 14px rgb(0 0 0 / .12); opacity: 0; max-width: 280px; }
+.hit { fill: transparent; }
+@page { size: A4; margin: 10mm; }
+@media print {
+  .viz-root { background: #fff; padding: 0; font-size: 13px; }
+  .card, .tile, .resumo, .cav, tr { break-inside: avoid; }
+  td, th { padding: 3px 6px; }
+  .card { padding: 12px 14px; margin-bottom: 10px; }
+  .tile { padding: 10px 12px; } .tile .num { font-size: 22px; }
+  svg text { font-size: 14.5px; } svg .head { font-size: 15px; }
+  #tip { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+  <h1>Quem são os fornecedores das prefeituras paulistas?</h1>
+  <p class="sub">Amostra final do estudo: 635 municípios fiscalizados pelo TCESP, mandatos 2009–12, 2013–16 e 2017–20.
+    Fornecedor = empresa ou entidade (raiz do CNPJ). Valores empenhados, nominais.</p>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section class="resumo">
+    <h2>Em poucas palavras</h2>
+    <ul id="resumo"></ul>
+  </section>
+
+  <section class="card">
+    <h2>1. Muitos pequenos comerciantes; o dinheiro vai para obras, saúde e atacado</h2>
+    <p class="lead">Parcela dos fornecedores e parcela do valor por setor de atividade (seção da CNAE). O comércio reúne 44% dos fornecedores,
+      mas só 21% do valor; saúde, construção e coleta de lixo pesam muito mais no dinheiro do que no número de empresas.</p>
+    <svg id="c1" role="img" aria-label="Fornecedores e valor por setor"></svg>
+  </section>
+
+  <section class="card">
+    <h2>2. A maioria atende uma prefeitura só; os que atendem muitas continuam mais</h2>
+    <p class="lead">Fornecedores por número de prefeituras atendidas no mesmo mandato. A última coluna é a parcela das ligações que continuam
+      no mandato seguinte, sem ajuste: é por isso que o estudo compara fornecedores de mesmo tamanho e setor.</p>
+    <svg id="c2" role="img" aria-label="Fornecedores por número de clientes"></svg>
+  </section>
+
+  <section class="card">
+    <h2>3. Que tipo de organização são</h2>
+    <p class="lead">Natureza jurídica e porte no cadastro atual da Receita. Associações, fundações e organizações sociais são 4% dos fornecedores,
+      mas 17% do valor, dois terços dele em saúde.</p>
+    <svg id="c3" role="img" aria-label="Fornecedores e valor por natureza jurídica"></svg>
+    <svg id="c3b" role="img" aria-label="Fornecedores e valor por porte" style="margin-top:14px"></svg>
+  </section>
+
+  <section class="card">
+    <h2>4. Os ramos com mais fornecedores</h2>
+    <p class="lead">As 15 divisões da CNAE com mais fornecedores-mandato.</p>
+    <table id="t4"></table>
+  </section>
+
+  <section class="card">
+    <h2>5. Os 20 maiores por valor</h2>
+    <p class="lead">Soma dos três mandatos. “Prefeituras” é o máximo de municípios atendidos num mesmo mandato. Nome como aparece nos empenhos do TCESP.</p>
+    <table id="t5"></table>
+    <p class="note">Natureza jurídica do cadastro de 2026: algumas empresas com “LTDA” no nome usado nos empenhos hoje são S.A.</p>
+  </section>
+
+  <div class="cav"><strong>Como ler.</strong> Contagens em fornecedor-mandato: a mesma empresa conta uma vez em cada mandato em que vendeu.
+    A rede já está limpa: saem pessoas físicas, órgãos e empresas públicas, concessionárias de energia, água, esgoto e telefonia, bancos, emissoras de vale e despesas com pessoal e dívida; organizações sociais de saúde ficam.
+    Porte, natureza e situação vêm do cadastro da Receita de outubro de 2026, não da época da venda.
+    Números de <code>docs/publicacao/tabelas/perfil_fornecedores.json</code>, gerados por <code>codigo/perfil_fornecedores.py</code>.</div>
+</main>
+<div id="tip"></div>
+</div>
+
+<script>
+const D = {
+ "total": {
+  "arestas": 1951293,
+  "fornecedores": 468546,
+  "fornecedores_mandato": 712461,
+  "valor_bi": 313.717821,
+  "mediana_clientes": 1.0,
+  "parcela_um_cliente": 0.626716,
+  "parcela_baixada": 0.256497,
+  "municipios": 635
+ },
+ "por_mandato": [
+  {
+   "eleicao": 2008,
+   "fornecedores": 239325,
+   "valor_bi": 80.36728,
+   "arestas": 669557
+  },
+  {
+   "eleicao": 2012,
+   "fornecedores": 229043,
+   "valor_bi": 103.266969,
+   "arestas": 614943
+  },
+  {
+   "eleicao": 2016,
+   "fornecedores": 244093,
+   "valor_bi": 130.083573,
+   "arestas": 666793
+  }
+ ],
+ "clientes": [
+  {
+   "faixa": "1",
+   "ordem": 1,
+   "fornecedores": 446511,
+   "arestas": 446511,
+   "valor_bi": 64.520159,
+   "taxa_continua": 0.323385
+  },
+  {
+   "faixa": "2",
+   "ordem": 2,
+   "fornecedores": 110562,
+   "arestas": 201401,
+   "valor_bi": 28.254918,
+   "taxa_continua": 0.332123
+  },
+  {
+   "faixa": "3-5",
+   "ordem": 3,
+   "fornecedores": 91528,
+   "arestas": 302193,
+   "valor_bi": 50.453907,
+   "taxa_continua": 0.349978
+  },
+  {
+   "faixa": "6-10",
+   "ordem": 6,
+   "fornecedores": 35329,
+   "arestas": 238696,
+   "valor_bi": 57.147776,
+   "taxa_continua": 0.371452
+  },
+  {
+   "faixa": "11-50",
+   "ordem": 11,
+   "fornecedores": 25348,
+   "arestas": 450782,
+   "valor_bi": 77.870613,
+   "taxa_continua": 0.393155
+  },
+  {
+   "faixa": "51+",
+   "ordem": 51,
+   "fornecedores": 3183,
+   "arestas": 311710,
+   "valor_bi": 35.470448,
+   "taxa_continua": 0.490706
+  }
+ ],
+ "secoes": [
+  {
+   "letra": "G",
+   "secao": "Comércio (inclui veículos e peças)",
+   "fornecedores": 310787,
+   "valor_bi": 64.904523,
+   "arestas": 996964,
+   "taxa_continua": 0.4058
+  },
+  {
+   "letra": "C",
+   "secao": "Indústria de transformação",
+   "fornecedores": 74621,
+   "valor_bi": 14.920559,
+   "arestas": 226856,
+   "taxa_continua": 0.342618
+  },
+  {
+   "letra": "N",
+   "secao": "Administrativas e serviços complementares",
+   "fornecedores": 47815,
+   "valor_bi": 24.114004,
+   "arestas": 117725,
+   "taxa_continua": 0.317197
+  },
+  {
+   "letra": "F",
+   "secao": "Construção",
+   "fornecedores": 46521,
+   "valor_bi": 62.907928,
+   "arestas": 89722,
+   "taxa_continua": 0.335681
+  },
+  {
+   "letra": "M",
+   "secao": "Profissionais, científicas e técnicas",
+   "fornecedores": 31899,
+   "valor_bi": 13.667848,
+   "arestas": 79378,
+   "taxa_continua": 0.346242
+  },
+  {
+   "letra": "Q",
+   "secao": "Saúde e serviços sociais",
+   "fornecedores": 30034,
+   "valor_bi": 50.298695,
+   "arestas": 69151,
+   "taxa_continua": 0.408194
+  },
+  {
+   "letra": "I",
+   "secao": "Alojamento e alimentação",
+   "fornecedores": 28708,
+   "valor_bi": 7.152032,
+   "arestas": 46548,
+   "taxa_continua": 0.271161
+  },
+  {
+   "letra": "S",
+   "secao": "Outros serviços",
+   "fornecedores": 28442,
+   "valor_bi": 9.25909,
+   "arestas": 59088,
+   "taxa_continua": 0.411386
+  },
+  {
+   "letra": "P",
+   "secao": "Educação",
+   "fornecedores": 26090,
+   "valor_bi": 7.158924,
+   "arestas": 59687,
+   "taxa_continua": 0.316417
+  },
+  {
+   "letra": "H",
+   "secao": "Transporte e correio",
+   "fornecedores": 24168,
+   "valor_bi": 17.575393,
+   "arestas": 44226,
+   "taxa_continua": 0.366617
+  },
+  {
+   "letra": "R",
+   "secao": "Artes, cultura e esporte",
+   "fornecedores": 19915,
+   "valor_bi": 2.309218,
+   "arestas": 51375,
+   "taxa_continua": 0.27453
+  },
+  {
+   "letra": "J",
+   "secao": "Informação e comunicação",
+   "fornecedores": 17957,
+   "valor_bi": 8.982804,
+   "arestas": 60317,
+   "taxa_continua": 0.40763
+  },
+  {
+   "letra": "A",
+   "secao": "Agropecuária",
+   "fornecedores": 13423,
+   "valor_bi": 0.432222,
+   "arestas": 17217,
+   "taxa_continua": 0.289249
+  },
+  {
+   "letra": "L",
+   "secao": "Imobiliárias",
+   "fornecedores": 4959,
+   "valor_bi": 1.859512,
+   "arestas": 9111,
+   "taxa_continua": 0.37987
+  },
+  {
+   "letra": "K",
+   "secao": "Financeiras e seguros",
+   "fornecedores": 2856,
+   "valor_bi": 3.007105,
+   "arestas": 12821,
+   "taxa_continua": 0.449419
+  },
+  {
+   "letra": "E",
+   "secao": "Coleta de lixo e resíduos",
+   "fornecedores": 1933,
+   "valor_bi": 24.431549,
+   "arestas": 4989,
+   "taxa_continua": 0.520946
+  },
+  {
+   "letra": "B",
+   "secao": "Indústrias extrativas",
+   "fornecedores": 1079,
+   "valor_bi": 0.510599,
+   "arestas": 4237,
+   "taxa_continua": 0.509323
+  },
+  {
+   "letra": "T",
+   "secao": "Serviços domésticos",
+   "fornecedores": 545,
+   "valor_bi": 0.007793,
+   "arestas": 589,
+   "taxa_continua": 0.322581
+  },
+  {
+   "letra": "O",
+   "secao": "Administração pública",
+   "fornecedores": 398,
+   "valor_bi": 0.051558,
+   "arestas": 971,
+   "taxa_continua": 0.514933
+  },
+  {
+   "letra": null,
+   "secao": "Sem CNAE",
+   "fornecedores": 303,
+   "valor_bi": 0.15983,
+   "arestas": 312,
+   "taxa_continua": 0.192308
+  },
+  {
+   "letra": "U",
+   "secao": "Organismos internacionais",
+   "fornecedores": 8,
+   "valor_bi": 0.006635,
+   "arestas": 9,
+   "taxa_continua": 0.0
+  }
+ ],
+ "divisoes": [
+  {
+   "divisao": "47",
+   "fornecedores": 210453,
+   "valor_bi": 27.108781,
+   "nome": "Comércio varejista"
+  },
+  {
+   "divisao": "45",
+   "fornecedores": 68118,
+   "valor_bi": 7.262849,
+   "nome": "Comércio e reparação de veículos e peças"
+  },
+  {
+   "divisao": "46",
+   "fornecedores": 32216,
+   "valor_bi": 30.532893,
+   "nome": "Comércio atacadista"
+  },
+  {
+   "divisao": "43",
+   "fornecedores": 31821,
+   "valor_bi": 10.035401,
+   "nome": "Serviços especializados de construção"
+  },
+  {
+   "divisao": "85",
+   "fornecedores": 26090,
+   "valor_bi": 7.158924,
+   "nome": "Educação"
+  },
+  {
+   "divisao": "86",
+   "fornecedores": 25703,
+   "valor_bi": 46.12326,
+   "nome": "Atenção à saúde humana"
+  },
+  {
+   "divisao": "82",
+   "fornecedores": 23264,
+   "valor_bi": 5.471962,
+   "nome": "Serviços de escritório e apoio administrativo"
+  },
+  {
+   "divisao": "56",
+   "fornecedores": 22185,
+   "valor_bi": 6.99913,
+   "nome": "Alimentação"
+  },
+  {
+   "divisao": "49",
+   "fornecedores": 20189,
+   "valor_bi": 16.990972,
+   "nome": "Transporte terrestre"
+  },
+  {
+   "divisao": "90",
+   "fornecedores": 12840,
+   "valor_bi": 1.453286,
+   "nome": "Atividades artísticas e de espetáculos"
+  },
+  {
+   "divisao": "01",
+   "fornecedores": 12672,
+   "valor_bi": 0.404027,
+   "nome": "Agricultura e pecuária"
+  },
+  {
+   "divisao": "94",
+   "fornecedores": 12546,
+   "valor_bi": 8.551683,
+   "nome": "Organizações associativas"
+  },
+  {
+   "divisao": "41",
+   "fornecedores": 10947,
+   "valor_bi": 27.674387,
+   "nome": "Construção de edifícios"
+  },
+  {
+   "divisao": "25",
+   "fornecedores": 10631,
+   "valor_bi": 0.633002,
+   "nome": "Produtos de metal"
+  },
+  {
+   "divisao": "77",
+   "fornecedores": 10343,
+   "valor_bi": 6.240298,
+   "nome": "Aluguéis não imobiliários"
+  }
+ ],
+ "natureza": [
+  {
+   "natureza": "Sociedade limitada",
+   "fornecedores": 378957,
+   "valor_bi": 212.07508
+  },
+  {
+   "natureza": "Empresário individual (inclui MEI)",
+   "fornecedores": 281668,
+   "valor_bi": 14.595507
+  },
+  {
+   "natureza": "Associação, fundação ou OS",
+   "fornecedores": 26897,
+   "valor_bi": 53.896048
+  },
+  {
+   "natureza": "Outras",
+   "fornecedores": 14449,
+   "valor_bi": 6.405156
+  },
+  {
+   "natureza": "EIRELI ou unipessoal",
+   "fornecedores": 4811,
+   "valor_bi": 1.539404
+  },
+  {
+   "natureza": "Sociedade anônima",
+   "fornecedores": 4240,
+   "valor_bi": 22.830735
+  },
+  {
+   "natureza": "Cooperativa",
+   "fornecedores": 1388,
+   "valor_bi": 2.223216
+  },
+  {
+   "natureza": "Sem cadastro",
+   "fornecedores": 51,
+   "valor_bi": 0.152676
+  }
+ ],
+ "porte": [
+  {
+   "porte": "Microempresa",
+   "fornecedores": 483713,
+   "valor_bi": 34.872575
+  },
+  {
+   "porte": "Demais",
+   "fornecedores": 121050,
+   "valor_bi": 236.423713
+  },
+  {
+   "porte": "Pequeno porte",
+   "fornecedores": 107647,
+   "valor_bi": 42.268857
+  },
+  {
+   "porte": "Não informado",
+   "fornecedores": 51,
+   "valor_bi": 0.152676
+  }
+ ],
+ "concentracao": {
+  "top1": 0.7288,
+  "top10": 0.948584,
+  "metade_menor": 0.00357,
+  "mediana_valor": 9500.0
+ },
+ "maiores": [
+  {
+   "raiz": "61699567",
+   "valor_bi": 4.224389,
+   "max_clientes": 16,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SPDM-ASSOCIAÇÃO PAULISTA P/ DESENVOLV.DA MEDICINA"
+  },
+  {
+   "raiz": "47497367",
+   "valor_bi": 3.764294,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "TERRACOM CONSTRUCOES LTDA"
+  },
+  {
+   "raiz": "53437315",
+   "valor_bi": 1.498787,
+   "max_clientes": 251,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "COMERCIAL JOAO AFONSO LTDA"
+  },
+  {
+   "raiz": "06291846",
+   "valor_bi": 1.444265,
+   "max_clientes": 194,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "CONSTROESTE CONSTRUTORA E PARTICIPACOES LTDA"
+  },
+  {
+   "raiz": "24232886",
+   "valor_bi": 1.357902,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "PRO SAUDE - ASSOCIACAO BENEF DE ASSITENCIA SOCIAL"
+  },
+  {
+   "raiz": "60924040",
+   "valor_bi": 1.318606,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Administrativas e serviços complementares",
+   "natureza": "Sociedade anônima",
+   "nome": "TB SERVICOS TRANSP LIMP GERENC REC HUMANOS LTDA"
+  },
+  {
+   "raiz": "46020301",
+   "valor_bi": 1.282789,
+   "max_clientes": 14,
+   "mandatos": 3,
+   "secao": "Educação",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SOCIEDADE CAMPINEIRA DE EDUCAÇÃO  E INSTRUÇÃO - SCEI"
+  },
+  {
+   "raiz": "10541089",
+   "valor_bi": 1.156022,
+   "max_clientes": 27,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade anônima",
+   "nome": "ESTRE SPI AMBIENTAL S/A"
+  },
+  {
+   "raiz": "49254634",
+   "valor_bi": 1.155346,
+   "max_clientes": 14,
+   "mandatos": 3,
+   "secao": "Alojamento e alimentação",
+   "natureza": "Sociedade anônima",
+   "nome": "NUTRIPLUS ALIMENTACAO E TECNOLOGIA LTDA"
+  },
+  {
+   "raiz": "62162847",
+   "valor_bi": 1.131592,
+   "max_clientes": 24,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "JOFEGE PAVIMENTACAO E CONSTRUCAO LTDA"
+  },
+  {
+   "raiz": "55996615",
+   "valor_bi": 1.098103,
+   "max_clientes": 15,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "CONSLADEL CONSTRUTORA E LACOS DETETORES E ELETRO-NICA LTDA"
+  },
+  {
+   "raiz": "62011788",
+   "valor_bi": 1.051631,
+   "max_clientes": 12,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "LITUCERA LIMPEZA E ENGENHARIA LTDA"
+  },
+  {
+   "raiz": "73188336",
+   "valor_bi": 1.021135,
+   "max_clientes": 22,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "PROVENCE CONSTRUTORA LTDA"
+  },
+  {
+   "raiz": "31733363",
+   "valor_bi": 0.993311,
+   "max_clientes": 10,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "CORPUS SANEAMENTO E OBRAS LTDA"
+  },
+  {
+   "raiz": "46044368",
+   "valor_bi": 0.936506,
+   "max_clientes": 4,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SERVIÇO DE SAÚDE DR. CÂNDIDO FERREIRA"
+  },
+  {
+   "raiz": "03829424",
+   "valor_bi": 0.919476,
+   "max_clientes": 16,
+   "mandatos": 3,
+   "secao": "Educação",
+   "natureza": "Sociedade limitada",
+   "nome": "PLANETA EDUCACAO GRAFICA E EDITORA LTDA"
+  },
+  {
+   "raiz": "09294054",
+   "valor_bi": 0.863797,
+   "max_clientes": 1,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade anônima",
+   "nome": "ECOOSASCO AMBIENTAL S A"
+  },
+  {
+   "raiz": "08528442",
+   "valor_bi": 0.83413,
+   "max_clientes": 436,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "NUTRICIONALE COMERCIO DE ALIMENTOS LTDA"
+  },
+  {
+   "raiz": "67729178",
+   "valor_bi": 0.820212,
+   "max_clientes": 574,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "COMERCIAL CIRURGICA RIOCLARENSE LTDA"
+  },
+  {
+   "raiz": "50668722",
+   "valor_bi": 0.818718,
+   "max_clientes": 15,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "PROACTIVA MEIO AMBIENTE BRASIL LTDA"
+  }
+ ],
+ "nota": "Fornecedor-mandato = raiz do CNPJ x mandato (2009-12, 2013-16, 2017-20). Valores nominais em R$ bilhões. Porte e natureza do cadastro da Receita de 2026-10."
+};
+const css = n => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(n).trim();
+const NS = 'http://www.w3.org/2000/svg';
+const el = (p, tag, a = {}, txt) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; };
+const num = (v, d = 0) => v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 0) => num(v * 100, d) + '%';
+const tip = document.getElementById('tip');
+const hover = (node, html) => {
+  node.addEventListener('mousemove', e => { tip.innerHTML = html; tip.style.opacity = 1; tip.style.left = Math.min(e.clientX + 14, innerWidth - 290) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; });
+  node.addEventListener('mouseleave', () => tip.style.opacity = 0);
+};
+const T = D.total, totF = T.fornecedores_mandato, totV = T.valor_bi;
+
+// Tiles e resumo
+const top1 = D.concentracao.top1, um = T.parcela_um_cliente;
+document.getElementById('tiles').innerHTML = [
+  ['Fornecedores diferentes', num(T.fornecedores), `${num(totF)} fornecedor-mandatos; ${num(T.arestas)} ligações com prefeituras`],
+  ['Atendem uma prefeitura só', pct(um), 'dos fornecedores em cada mandato'],
+  ['Valor nas mãos do 1% maior', pct(top1), `R$ ${num(totV, 0)} bi no total; os 10% maiores levam ${pct(D.concentracao.top10)}`],
+  ['Valor típico por mandato', 'R$ ' + num(D.concentracao.mediana_valor), `mediana; ${pct(T.parcela_baixada)} estão baixados hoje`],
+].map(([l, n, c]) => `<div class="tile"><div class="lab">${l}</div><div class="num">${n}</div><div class="ci">${c}</div></div>`).join('');
+
+const sec = Object.fromEntries(D.secoes.map(s => [s.letra, s]));
+document.getElementById('resumo').innerHTML = [
+  `São <strong>${num(T.fornecedores)}</strong> fornecedores; em cada mandato, entre 229 e 244 mil vendem a pelo menos uma prefeitura.`,
+  `A grande maioria é <strong>pequena e local</strong>: ${pct(um)} atendem uma prefeitura só, metade recebe até R$ ${num(D.concentracao.mediana_valor)} no mandato, e ${pct(sec.G.fornecedores / totF)} são do comércio (mercados, lojas, autopeças).`,
+  `O dinheiro é <strong>muito concentrado</strong>: o 1% maior recebe ${pct(top1)} do valor; a metade menor, menos de 1%.`,
+  `Os grandes estão em <strong>saúde</strong> (organizações sociais), <strong>obras</strong>, <strong>coleta de lixo</strong> e <strong>distribuição</strong> de alimentos e remédios, que atendem centenas de prefeituras.`,
+  `Quem atende mais prefeituras continua mais depois da eleição (${pct(D.clientes[0].taxa_continua)} com 1 cliente, ${pct(D.clientes.at(-1).taxa_continua)} com 51 ou mais).`,
+].map(t => `<li>${t}</li>`).join('');
+
+// Small multiples: rótulo + colunas de barras (parcelas), um eixo por coluna
+function multiplos(id, rows, cols, labelW = 290) {
+  const s = document.getElementById(id), W = 940, rh = 30, top = 30, gap = 34;
+  const colW = (W - labelW - gap * (cols.length - 1)) / cols.length;
+  const H = top + rows.length * rh + 6; s.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  cols.forEach((c, j) => {
+    const x0 = labelW + j * (colW + gap), max = c.max ?? Math.max(...rows.map(c.v));
+    el(s, 'text', { x: x0, y: 16, class: 'head' }, c.titulo);
+    rows.forEach((r, i) => {
+      const v = c.v(r), y = top + i * rh + 6, w = Math.max(1.5, v / max * (colW - 64));
+      el(s, 'rect', { x: x0, y, width: w, height: rh - 12, rx: 4, fill: css(c.cor) });
+      el(s, 'text', { x: x0 + w + 6, y: y + rh / 2 - 1, class: 'strong' }, c.fmt(v));
+    });
+  });
+  rows.forEach((r, i) => {
+    const y = top + i * rh;
+    el(s, 'text', { x: labelW - 14, y: y + rh / 2 + 4, 'text-anchor': 'end' }, r.rot);
+    hover(el(s, 'rect', { x: 0, y, width: W, height: rh, class: 'hit' }), `<b>${r.rot}</b><br>` + cols.map(c => `${c.titulo}: ${c.fmt(c.v(r))}`).join('<br>') + (r.extra ? '<br>' + r.extra : ''));
+  });
+}
+const colF = { titulo: '% dos fornecedores', v: r => r.f / totF, fmt: v => pct(v, 1), cor: '--s1' };
+const colV = { titulo: '% do valor', v: r => r.val / totV, fmt: v => pct(v, 1), cor: '--s2' };
+
+// 1. Seções (agrupa as pequenas)
+(() => {
+  const grandes = D.secoes.filter(s => s.fornecedores >= 4000 || s.valor_bi / totV >= 0.02);
+  const resto = D.secoes.filter(s => !grandes.includes(s));
+  const rows = grandes.map(s => ({ rot: s.secao, f: s.fornecedores, val: s.valor_bi, extra: `${num(s.fornecedores)} fornecedor-mandatos · R$ ${num(s.valor_bi, 1)} bi` }));
+  rows.push({ rot: 'Demais setores', f: resto.reduce((a, s) => a + s.fornecedores, 0), val: resto.reduce((a, s) => a + s.valor_bi, 0), extra: resto.map(s => s.secao).join(', ') });
+  multiplos('c1', rows, [colF, colV], 300);
+})();
+
+// 2. Clientes
+multiplos('c2', D.clientes.map(c => ({ rot: c.faixa === '1' ? '1 prefeitura' : c.faixa + ' prefeituras', f: c.fornecedores, val: c.valor_bi, cont: c.taxa_continua,
+  extra: `${num(c.fornecedores)} fornecedor-mandatos · ${num(c.arestas)} ligações` })),
+  [colF, colV, { titulo: 'Continuam (bruto)', v: r => r.cont, fmt: v => pct(v, 1), cor: '--s3', max: 0.6 }], 160);
+
+// 3. Natureza e porte
+const ordemN = ['Sociedade limitada', 'Empresário individual (inclui MEI)', 'Associação, fundação ou OS', 'Sociedade anônima', 'EIRELI ou unipessoal', 'Cooperativa', 'Outras'];
+const nat = ordemN.map(n => D.natureza.find(x => x.natureza === n)).filter(Boolean);
+const semCad = D.natureza.find(x => x.natureza === 'Sem cadastro');
+if (semCad) { const o = nat.find(x => x.natureza === 'Outras'); o.fornecedores += semCad.fornecedores; o.valor_bi += semCad.valor_bi; }
+multiplos('c3', nat.map(n => ({ rot: n.natureza, f: n.fornecedores, val: n.valor_bi, extra: `${num(n.fornecedores)} fornecedor-mandatos · R$ ${num(n.valor_bi, 1)} bi` })), [colF, colV], 300);
+multiplos('c3b', ['Microempresa', 'Pequeno porte', 'Demais'].map(p => D.porte.find(x => x.porte === p)).map(p => ({ rot: p.porte === 'Demais' ? 'Médio e grande (demais)' : p.porte, f: p.fornecedores, val: p.valor_bi })), [colF, colV], 300);
+
+// 4. Divisões
+document.getElementById('t4').innerHTML = '<tr><th>CNAE</th><th>Ramo</th><th class="n">Fornecedor-mandatos</th><th class="n">% do total</th><th class="n">Valor (R$ bi)</th></tr>' +
+  D.divisoes.map(d => `<tr><td>${d.divisao}</td><td>${d.nome}</td><td class="n">${num(d.fornecedores)}</td><td class="n">${pct(d.fornecedores / totF, 1)}</td><td class="n">${num(d.valor_bi, 1)}</td></tr>`).join('');
+
+// 5. Maiores
+const MIN = new Set(['de', 'da', 'do', 'das', 'dos', 'e', 'p/']);
+const SIGLAS = new Set(['ltda', 's/a', 'sa', 'spdm', 'scei', 'spi']);
+const tit = s => s.toLowerCase().replace(/\s+/g, ' ').split(' ').map((w, i) =>
+  SIGLAS.has(w) ? w.toUpperCase() : (i && MIN.has(w)) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ').replace(/ S A$/i, ' S.A.');
+document.getElementById('t5').innerHTML = '<tr><th>#</th><th>Fornecedor</th><th>Setor</th><th class="n">R$ bi</th><th class="n">Prefeituras</th></tr>' +
+  D.maiores.map((m, i) => `<tr><td>${i + 1}</td><td>${tit(m.nome)}</td><td>${m.secao}</td><td class="n">${num(m.valor_bi, 2)}</td><td class="n">${num(m.max_clientes)}</td></tr>`).join('');
+</script>
+</body>
+</html>

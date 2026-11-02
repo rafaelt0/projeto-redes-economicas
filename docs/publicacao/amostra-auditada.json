@@ -1,0 +1,481 @@
+{
+  "eventos": 74,
+  "mandatos_com_evento": 72,
+  "total": {
+    "n": 1951293,
+    "municipios": 635,
+    "fornecedores": 468546
+  },
+  "resumo": [
+    {
+      "eleicao_transicao": 2012,
+      "n": 669557,
+      "municipios": 592,
+      "fornecedores": 239325,
+      "continua_pct": 37.342302447737836
+    },
+    {
+      "eleicao_transicao": 2016,
+      "n": 614943,
+      "municipios": 562,
+      "fornecedores": 229043,
+      "continua_pct": 37.28556955685324
+    },
+    {
+      "eleicao_transicao": 2020,
+      "n": 666793,
+      "municipios": 589,
+      "fornecedores": 244093,
+      "continua_pct": 38.48000803847671
+    }
+  ],
+  "removidas": [
+    {
+      "codigo_ibge": "3503307",
+      "municipio": "Araras",
+      "eleicao_transicao": 2016,
+      "arestas": 1779
+    },
+    {
+      "codigo_ibge": "3503307",
+      "municipio": "Araras",
+      "eleicao_transicao": 2020,
+      "arestas": 1809
+    },
+    {
+      "codigo_ibge": "3536505",
+      "municipio": "Paulínia",
+      "eleicao_transicao": 2016,
+      "arestas": 2088
+    },
+    {
+      "codigo_ibge": "3536505",
+      "municipio": "Paulínia",
+      "eleicao_transicao": 2020,
+      "arestas": 1705
+    }
+  ],
+  "exposicoes": [
+    {
+      "n": 951576,
+      "novo_reclassificadas": 9068,
+      "antigo_reclassificadas": 8042
+    }
+  ],
+  "filtro_identidade_conservador": true,
+  "identidade_excluida": [
+    {
+      "codigo_ibge": "3502507",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 732
+    },
+    {
+      "codigo_ibge": "3502606",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 801
+    },
+    {
+      "codigo_ibge": "3503307",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1738
+    },
+    {
+      "codigo_ibge": "3506508",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 2149
+    },
+    {
+      "codigo_ibge": "3506508",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1826
+    },
+    {
+      "codigo_ibge": "3507209",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 898
+    },
+    {
+      "codigo_ibge": "3507209",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 873
+    },
+    {
+      "codigo_ibge": "3507704",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 931
+    },
+    {
+      "codigo_ibge": "3507704",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 886
+    },
+    {
+      "codigo_ibge": "3509205",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1003
+    },
+    {
+      "codigo_ibge": "3510401",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1418
+    },
+    {
+      "codigo_ibge": "3510401",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1364
+    },
+    {
+      "codigo_ibge": "3511508",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1603
+    },
+    {
+      "codigo_ibge": "3511508",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1651
+    },
+    {
+      "codigo_ibge": "3512209",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1292
+    },
+    {
+      "codigo_ibge": "3512209",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1269
+    },
+    {
+      "codigo_ibge": "3516408",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 705
+    },
+    {
+      "codigo_ibge": "3516408",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 864
+    },
+    {
+      "codigo_ibge": "3517604",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 915
+    },
+    {
+      "codigo_ibge": "3518305",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 1283
+    },
+    {
+      "codigo_ibge": "3518602",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 1270
+    },
+    {
+      "codigo_ibge": "3519303",
+      "eleicao_transicao": 2020,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1388
+    },
+    {
+      "codigo_ibge": "3522208",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1184
+    },
+    {
+      "codigo_ibge": "3522208",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1113
+    },
+    {
+      "codigo_ibge": "3522307",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 2356
+    },
+    {
+      "codigo_ibge": "3522307",
+      "eleicao_transicao": 2020,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 2150
+    },
+    {
+      "codigo_ibge": "3523008",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 771
+    },
+    {
+      "codigo_ibge": "3523008",
+      "eleicao_transicao": 2020,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 937
+    },
+    {
+      "codigo_ibge": "3523206",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1322
+    },
+    {
+      "codigo_ibge": "3523206",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1130
+    },
+    {
+      "codigo_ibge": "3526704",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 2185
+    },
+    {
+      "codigo_ibge": "3526704",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1733
+    },
+    {
+      "codigo_ibge": "3528403",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 780
+    },
+    {
+      "codigo_ibge": "3528502",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 701
+    },
+    {
+      "codigo_ibge": "3528502",
+      "eleicao_transicao": 2020,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1255
+    },
+    {
+      "codigo_ibge": "3529500",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 818
+    },
+    {
+      "codigo_ibge": "3531100",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 643
+    },
+    {
+      "codigo_ibge": "3531100",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 586
+    },
+    {
+      "codigo_ibge": "3532157",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 730
+    },
+    {
+      "codigo_ibge": "3532157",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 837
+    },
+    {
+      "codigo_ibge": "3533403",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1625
+    },
+    {
+      "codigo_ibge": "3533403",
+      "eleicao_transicao": 2020,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1477
+    },
+    {
+      "codigo_ibge": "3535804",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 1393
+    },
+    {
+      "codigo_ibge": "3536505",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 2909
+    },
+    {
+      "codigo_ibge": "3536901",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 776
+    },
+    {
+      "codigo_ibge": "3536901",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 873
+    },
+    {
+      "codigo_ibge": "3539905",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 995
+    },
+    {
+      "codigo_ibge": "3540101",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 855
+    },
+    {
+      "codigo_ibge": "3542305",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 498
+    },
+    {
+      "codigo_ibge": "3544608",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 914
+    },
+    {
+      "codigo_ibge": "3544608",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 945
+    },
+    {
+      "codigo_ibge": "3546256",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 586
+    },
+    {
+      "codigo_ibge": "3546256",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 609
+    },
+    {
+      "codigo_ibge": "3547502",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 1161
+    },
+    {
+      "codigo_ibge": "3549508",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1081
+    },
+    {
+      "codigo_ibge": "3549706",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1631
+    },
+    {
+      "codigo_ibge": "3549706",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1366
+    },
+    {
+      "codigo_ibge": "3550704",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 1138
+    },
+    {
+      "codigo_ibge": "3550704",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 955
+    },
+    {
+      "codigo_ibge": "3553203",
+      "eleicao_transicao": 2012,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 679
+    },
+    {
+      "codigo_ibge": "3553203",
+      "eleicao_transicao": 2016,
+      "motivo": "candidatura_cassada_ou_cancelada",
+      "arestas": 681
+    },
+    {
+      "codigo_ibge": "3556701",
+      "eleicao_transicao": 2016,
+      "motivo": "reeleicao_2016_inconsistente",
+      "arestas": 1655
+    }
+  ],
+  "identidade_excluida_arestas": 72892,
+  "municipios_sem_transicao": [
+    {
+      "codigo_ibge": "3503307",
+      "municipio": "Araras"
+    },
+    {
+      "codigo_ibge": "3509205",
+      "municipio": "Cajamar"
+    },
+    {
+      "codigo_ibge": "3516903",
+      "municipio": "General Salgado"
+    },
+    {
+      "codigo_ibge": "3519303",
+      "municipio": "Ibaté"
+    },
+    {
+      "codigo_ibge": "3526704",
+      "municipio": "Leme"
+    },
+    {
+      "codigo_ibge": "3528403",
+      "municipio": "Mairinque"
+    },
+    {
+      "codigo_ibge": "3536505",
+      "municipio": "Paulínia"
+    },
+    {
+      "codigo_ibge": "3549508",
+      "municipio": "São José da Bela Vista"
+    },
+    {
+      "codigo_ibge": "3556354",
+      "municipio": "Vargem"
+    }
+  ],
+  "sha256_arquivo": "8182817671f86bc35bcf2d6d1e079b877ec01fb01958a4b0bb8829c043b870f7",
+  "fonte": "Parquets legados + todas as candidaturas TSE locais"
+}

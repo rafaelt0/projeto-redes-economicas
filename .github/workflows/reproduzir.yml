@@ -1,0 +1,39 @@
+name: reproduzir
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run reproduzir.py testes
+
+  reproducao:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: testes
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+      # Baixar com o gh funciona também enquanto o repositório é privado; o reproduzir.py confere o SHA-256.
+      - run: gh release download dados-v1 --pattern dados-reproducao-v1.zip --dir dados
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: uv run reproduzir.py
+      # No Linux, até as figuras saem idênticas às versionadas.
+      - if: runner.os == 'Linux'
+        run: git status --porcelain && test -z "$(git status --porcelain)"

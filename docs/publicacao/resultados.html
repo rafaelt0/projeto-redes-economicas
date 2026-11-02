@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados: a rede de fornecedores sobrevive à troca de prefeito?</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --surface-0: #f4f3f0; --surface-1: #fcfcfb; --border: #e2e1dc; --grid: #ebeae6;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --neutral: #9a9994;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2c; --grid: #262624;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --neutral: #6f6e69;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--surface-0); color: var(--text-primary);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 32px 20px 60px; min-height: 100vh; }
+main { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; }
+h2 { font-size: 18px; margin: 0 0 4px; }
+.sub { color: var(--text-secondary); margin: 0 0 24px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.tile, .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+.tile { padding: 14px 16px; }
+.tile .lab { font-size: 13px; color: var(--text-secondary); }
+.tile .num { font-size: 28px; font-weight: 650; font-variant-numeric: tabular-nums; margin: 2px 0; }
+.tile .ci { font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.card { padding: 18px 20px; margin-bottom: 16px; }
+.card p.lead { color: var(--text-secondary); margin: 0 0 12px; font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--text-secondary); margin: 4px 0 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { fill: var(--text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+svg .strong { fill: var(--text-primary); font-weight: 600; }
+svg .muted { fill: var(--text-muted); }
+.gridline { stroke: var(--grid); }
+.zero { stroke: var(--text-muted); stroke-dasharray: 3 3; }
+.note { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+details { margin-top: 10px; font-size: 13px; }
+summary { cursor: pointer; color: var(--text-secondary); }
+table { border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); }
+th { color: var(--text-secondary); font-weight: 600; }
+.cav { border-left: 3px solid var(--neutral); padding: 10px 14px; background: var(--surface-1); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--text-secondary); }
+#tip { position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 10px; font-size: 12.5px; box-shadow: 0 4px 14px rgb(0 0 0 / .12); opacity: 0; transition: opacity .1s; max-width: 280px; }
+.hit { fill: transparent; cursor: default; }
+.resumo { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; }
+.resumo h2 { margin-bottom: 6px; }
+.resumo ul { margin: 0; padding-left: 20px; }
+.resumo li { margin: 3px 0; }
+@page { size: A4; margin: 10mm; }
+@media print {
+  .viz-root { background: #fff; padding: 0; min-height: 0; }
+  .card, .tile, .resumo { break-inside: avoid; }
+  .card { margin-bottom: 10px; }
+  .viz-root { font-size: 13px; }
+  .card { padding: 12px 14px; }
+  .tiles { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tile { padding: 10px 12px; }
+  .tile .num { font-size: 22px; }
+  svg text { font-size: 14.5px; }
+  #tip { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+  <h1>A rede de fornecedores sobrevive à troca de prefeito?</h1>
+  <p class="sub">Municípios paulistas fiscalizados pelo TCESP, 2009–2024, com 3 transições (eleições de 2012, 2016 e 2020).
+    1.951.293 ligações prefeitura–fornecedor comparáveis em 635 municípios. Base auditada: <code>permanencia_auditada.parquet</code>.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="lab">Continuam após a eleição (média geral)</div><div class="num">37,7%</div><div class="ci">das ligações vendem à mesma prefeitura no mandato seguinte</div></div>
+    <div class="tile"><div class="lab">Novo prefeito de outro partido, comparado a novo prefeito do mesmo partido (M4)</div><div class="num">−2,38 pp</div><div class="ci">IC 95%: −3,02 a −1,73</div></div>
+    <div class="tile"><div class="lab">Parte da queda: fornecedor perde a prefeitura, mas segue na rede</div><div class="num">71,4%</div><div class="ci">IC 95%: 64,6 a 78,5 (alocação contábil)</div></div>
+    <div class="tile"><div class="lab">Hipótese da ponte: atender só o partido novo − só o antigo (E2)</div><div class="num">+0,04 pp</div><div class="ci">IC 95%: −0,46 a 0,54, sem diferença</div></div>
+  </div>
+
+  <section class="resumo">
+    <h2>Em poucas palavras</h2>
+    <ul>
+      <li>Em média, <strong>37,7%</strong> das ligações prefeitura–fornecedor continuam no mandato seguinte.</li>
+      <li>Quando <strong>mudam o prefeito e o partido</strong>, a continuidade é cerca de <strong>2,3 a 2,4 pontos menor</strong>. Trocar só o prefeito ou só a legenda não faz diferença detectável.</li>
+      <li>A maior parte dessa queda (<strong>71%</strong>) é de fornecedores que perdem aquela prefeitura, mas <strong>seguem vendendo a outras</strong>: não somem do mercado.</li>
+      <li>A hipótese da <strong>ponte</strong> não se confirmou: já vender ao partido que assume não ajuda mais do que vender ao partido que sai.</li>
+      <li>São associações, não efeito causal; continuar não indica favorecimento.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>1. A queda aparece só quando mudam prefeito e partido juntos</h2>
+    <p class="lead">Diferença na continuidade em relação a “mesmo prefeito, mesmo partido” (modelo M4: efeitos fixos de município e de fornecedor × transição,
+      controles de anos ativos e valor, erros agrupados em duas dimensões). Trocar só o prefeito ou só a legenda não se distingue de zero.</p>
+    <svg id="c1" viewBox="0 0 940 210" role="img" aria-label="Coeficientes do modelo M4 por tipo de transição"></svg>
+    <details><summary>Taxas brutas e tabela</summary>
+      <table><tr><th>Transição</th><th>Ligações</th><th>Continuam (bruto)</th><th>M4 (pp)</th><th>IC 95%</th></tr>
+        <tr><td>Mesmo prefeito, mesmo partido (referência)</td><td>458.302</td><td>39,2%</td><td>0</td><td>–</td></tr>
+        <tr><td>Novo prefeito, mesmo partido</td><td>148.855</td><td>39,8%</td><td>+0,09</td><td>−0,55 a 0,73</td></tr>
+        <tr><td>Mesmo prefeito, outra legenda</td><td>115.554</td><td>39,4%</td><td>+0,12</td><td>−0,79 a 1,03</td></tr>
+        <tr><td>Novo prefeito e novo partido (alternância)</td><td>1.228.582</td><td>36,7%</td><td>−2,29</td><td>−2,77 a −1,81</td></tr>
+      </table></details>
+  </section>
+
+  <section class="card">
+    <h2>2. O tombo é na virada do mandato e se recupera em parte depois</h2>
+    <p class="lead">Taxa anual de continuidade (vende de novo no ano seguinte), em anos relativos à eleição. Em t = 0 mede-se a passagem
+      do ano da eleição para o primeiro ano do novo mandato. Cada município–eleição pesa igual; faixas de 95% por bootstrap de municípios.</p>
+    <div class="legend" id="lg2"></div>
+    <svg id="c2" viewBox="0 0 940 330" role="img" aria-label="Perfil anual de continuidade por categoria"></svg>
+    <p class="note">Salto em t = 0 (variação contra t = −1): alternância −5,56 pp [−6,01; −5,13]; só prefeito −1,66 [−2,53; −0,75];
+      só partido +0,98 [0,26; 1,72]; nada muda +0,79 [0,34; 1,22].</p>
+  </section>
+
+  <section class="card">
+    <h2>3. Para onde vão as ligações que não continuam</h2>
+    <p class="lead">Diferença padronizada entre alternância e as demais transições (Mantel-Haenszel por faixa de clientes, setor e transição).
+      Os −2,79 pp de continuidade se redistribuem entre os três destinos; a maior parte vai para quem perde aquela prefeitura mas segue vendendo a outras.</p>
+    <svg id="c3" viewBox="0 0 940 200" role="img" aria-label="Decomposição por destino"></svg>
+    <p class="note">Entre as ligações que não continuam, seguem na rede 57,5% com alternância e 56,9% sem ela (diferença 0,64 pp, IC 0,33 a 0,95).
+      Ou seja: 80% da parcela de 71,4% vêm da maior taxa de quebra; 20%, de uma composição de destinos um pouco diferente.
+      “Saiu, sem baixa confirmada” inclui cadastro ausente e outras situações, não só empresas ativas.</p>
+  </section>
+
+  <section class="card">
+    <h2>4. Hipótese da ponte: não confirmada</h2>
+    <p class="lead">Fornecedores que já vendiam a outra prefeitura do partido que assume continuam mais? Taxas brutas sugerem que sim, mas o placebo
+      (atender o partido que sai) mostra o mesmo ganho: o que pesa é o tamanho do fornecedor, não o lado político.</p>
+    <svg id="c4" viewBox="0 0 940 200" role="img" aria-label="Continuidade bruta por exposição partidária"></svg>
+    <p class="note">Com efeitos fixos de fornecedor × transição (E2): só novo +0,10 pp [−0,38; 0,57]; só antigo +0,05 [−0,41; 0,52];
+      ambos −0,04 [−0,58; 0,49]. Diferença novo − antigo: +0,04 [−0,46; 0,54]. Amostra: alternâncias, fornecedores com 2+ clientes (951.576 ligações).</p>
+  </section>
+
+  <section class="card">
+    <h2>5. O resultado é estável nas variações</h2>
+    <p class="lead">Coeficiente de “muda prefeito e partido” em cada especificação. A janela importa para o tamanho (recorte do último ano do mandato
+      dá efeitos maiores), não para a direção.</p>
+    <svg id="c5" viewBox="0 0 940 300" role="img" aria-label="Robustez do coeficiente de alternância"></svg>
+  </section>
+
+  <div class="cav"><strong>Como ler.</strong> O desenho é observacional: mostra associação, não efeito causal. Continuar não é favorecimento
+    (pode ser fornecedor único ou contrato longo) e sair não é necessariamente punição (26% das empresas de 2012 estão baixadas hoje).
+    Análises retrospectivas, especificadas em <code>docs/protocolo-publicacao.md</code>; números de <code>docs/publicacao/tabelas/</code>.</div>
+</main>
+<div id="tip"></div>
+</div>
+
+<script>
+if (location.hash === '#pdf') document.querySelectorAll('details').forEach(d => d.open = true);
+const css = n => getComputedStyle(document.querySelector('.viz-root')).getPropertyValue(n).trim();
+const NS = 'http://www.w3.org/2000/svg';
+const el = (p, tag, a = {}, txt) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; };
+const fmt = (v, d = 2) => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(d).replace('.', ',');
+const fmtp = (v, d = 1) => v.toFixed(d).replace('.', ',') + '%';
+const tip = document.getElementById('tip');
+const show = (ev, html) => { tip.innerHTML = html; tip.style.opacity = 1; tip.style.left = Math.min(ev.clientX + 14, innerWidth - 290) + 'px'; tip.style.top = (ev.clientY + 14) + 'px'; };
+const hide = () => tip.style.opacity = 0;
+const hover = (node, html) => { node.addEventListener('mousemove', e => show(e, html)); node.addEventListener('mouseleave', hide); };
+
+// Gráfico de pontos com IC (pp) — usado em 1 e 5
+function forest(id, rows, x0, x1, ticks, labelW = 330) {
+  const s = document.getElementById(id), W = 940, top = 10, rowH = 34, L = labelW, R = 860;
+  const H = top + rows.length * rowH + 30; s.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const x = v => L + (v - x0) / (x1 - x0) * (R - L);
+  ticks.forEach(t => { el(s, 'line', { x1: x(t), x2: x(t), y1: top, y2: H - 26, class: t === 0 ? 'zero' : 'gridline' }); el(s, 'text', { x: x(t), y: H - 8, 'text-anchor': 'middle', class: 'muted' }, fmt(t, 0)); });
+  el(s, 'text', { x: R, y: H - 8, 'text-anchor': 'start', dx: 8, class: 'muted' }, 'pp');
+  rows.forEach((r, i) => {
+    const y = top + i * rowH + rowH / 2, c = r.cor || css('--s1');
+    el(s, 'text', { x: L - 12, y: y + 4, 'text-anchor': 'end', class: r.forte ? 'strong' : '' }, r.rot);
+    if (r.lo != null) el(s, 'line', { x1: x(r.lo), x2: x(r.hi), y1: y, y2: y, stroke: c, 'stroke-width': 2, 'stroke-linecap': 'round' });
+    el(s, 'circle', { cx: x(r.v), cy: y, r: 5, fill: c, stroke: css('--surface-1'), 'stroke-width': 2 });
+    el(s, 'text', { x: R + 8, y: y + 4, class: 'strong' }, fmt(r.v));
+    const h = el(s, 'rect', { x: 0, y: y - rowH / 2, width: W, height: rowH, class: 'hit' });
+    hover(h, `<b>${r.rot}</b><br>${fmt(r.v)} pp` + (r.lo != null ? `<br>IC 95%: ${fmt(r.lo)} a ${fmt(r.hi)}` : '') + (r.n ? `<br>${r.n}` : ''));
+  });
+}
+
+// 1. M4 (coeficientes em proporção → pp)
+forest('c1', [
+  { rot: 'Novo prefeito, mesmo partido', v: 0.087, lo: -0.554, hi: 0.728, cor: css('--s3'), n: '148.855 ligações' },
+  { rot: 'Mesmo prefeito, outra legenda', v: 0.123, lo: -0.789, hi: 1.034, cor: css('--s4'), n: '115.554 ligações' },
+  { rot: 'Novo prefeito e novo partido', v: -2.289, lo: -2.771, hi: -1.808, cor: css('--s2'), forte: 1, n: '1.228.582 ligações' },
+  { rot: 'Outro partido − mesmo partido (sucessões)', v: -2.377, lo: -3.021, hi: -1.733, cor: css('--neutral'), forte: 1 },
+], -4, 2, [-4, -3, -2, -1, 0, 1, 2]);
+
+// 2. Perfil anual
+(() => {
+  const P = {
+    mantem_ambos: [[56.31,55.69,56.86],[55.14,54.63,55.63],[55.34,54.78,55.88],[56.38,55.8,56.93],[58.85,58.29,59.39],[56.64,56.12,57.16],[54.37,53.7,55.02]],
+    muda_ambos:   [[56.48,56.06,56.84],[55.48,55.12,55.84],[55.07,54.64,55.47],[50.11,49.53,50.66],[56.6,56.18,56.97],[55.24,54.88,55.6],[53.34,52.92,53.74]],
+    muda_prefeito:[[58.21,57.35,59.04],[57.15,56.39,57.93],[56.75,55.79,57.62],[55.7,54.59,56.83],[58.46,57.58,59.34],[57.0,56.18,57.84],[55.21,53.98,56.37]],
+    muda_partido: [[56.04,55.0,57.04],[55.83,54.85,56.78],[54.68,53.63,55.75],[56.5,55.38,57.57],[58.91,57.79,60.0],[57.01,55.87,58.12],[52.58,50.68,54.18]],
+  };
+  const S = [
+    ['mantem_ambos', 'Nada muda', '--s1', 385], ['muda_ambos', 'Muda prefeito e partido', '--s2', 1132],
+    ['muda_prefeito', 'Só o prefeito', '--s3', 129], ['muda_partido', 'Só o partido', '--s4', 97]];
+  const lg = document.getElementById('lg2');
+  S.forEach(([, n, c, k]) => lg.insertAdjacentHTML('beforeend', `<span><i style="background:var(${c})"></i>${n} (${k} município–eleições)</span>`));
+  const s = document.getElementById('c2'), L = 50, R = 750, T = 10, B = 290, y0 = 49, y1 = 61;
+  const x = t => L + (t + 3) / 6 * (R - L), y = v => B - (v - y0) / (y1 - y0) * (B - T);
+  for (let v = 50; v <= 60; v += 2) { el(s, 'line', { x1: L, x2: R, y1: y(v), y2: y(v), class: 'gridline' }); el(s, 'text', { x: L - 8, y: y(v) + 4, 'text-anchor': 'end', class: 'muted' }, v + '%'); }
+  for (let t = -3; t <= 3; t++) el(s, 'text', { x: x(t), y: B + 20, 'text-anchor': 'middle', class: t === 0 ? 'strong' : 'muted' }, t === 0 ? 't = 0 (posse)' : (t > 0 ? '+' : '') + t);
+  el(s, 'line', { x1: x(0), x2: x(0), y1: T, y2: B, class: 'zero' });
+  S.forEach(([k, , c]) => {
+    const col = css(c), d = P[k];
+    el(s, 'path', { d: 'M' + d.map((p, i) => `${x(i - 3)},${y(p[1])}`).join('L') + 'L' + d.map((p, i) => `${x(i - 3)},${y(p[2])}`).reverse().join('L') + 'Z', fill: col, opacity: k === 'muda_ambos' ? .16 : .09 });
+  });
+  S.forEach(([k, n, c]) => {
+    const col = css(c), d = P[k];
+    el(s, 'path', { d: 'M' + d.map((p, i) => `${x(i - 3)},${y(p[0])}`).join('L'), fill: 'none', stroke: col, 'stroke-width': k === 'muda_ambos' ? 2.5 : 2, 'stroke-linejoin': 'round' });
+    d.forEach((p, i) => el(s, 'circle', { cx: x(i - 3), cy: y(p[0]), r: 4, fill: col, stroke: css('--surface-1'), 'stroke-width': 2 }));
+    el(s, 'text', { x: R + 10, y: y(d[6][0]) + 4 + ({ mantem_ambos: 0, muda_ambos: 0, muda_prefeito: -2, muda_partido: 4 }[k]), class: 'strong' }, n);
+  });
+  const g = el(s, 'line', { y1: T, y2: B, stroke: css('--text-muted'), opacity: 0 });
+  for (let t = -3; t <= 3; t++) {
+    const h = el(s, 'rect', { x: x(t) - (R - L) / 12, y: T, width: (R - L) / 6, height: B - T, class: 'hit' });
+    h.addEventListener('mousemove', e => { g.setAttribute('x1', x(t)); g.setAttribute('x2', x(t)); g.setAttribute('opacity', .5);
+      show(e, `<b>t = ${t}</b><br>` + S.map(([k, n]) => `${n}: ${fmtp(P[k][t + 3][0])}`).join('<br>')); });
+    h.addEventListener('mouseleave', () => { g.setAttribute('opacity', 0); hide(); });
+  }
+})();
+
+// 3. Decomposição por destino (barras divergentes)
+(() => {
+  const rows = [
+    ['Continua com a mesma prefeitura', -2.791, -3.323, -2.278, '--s2'],
+    ['Perdeu a prefeitura, segue na rede', 1.993, 1.628, 2.393, '--s1'],
+    ['Saiu da rede, empresa baixada', 0.471, 0.294, 0.657, '--neutral'],
+    ['Saiu da rede, sem baixa confirmada', 0.326, 0.026, 0.630, '--neutral'],
+  ];
+  const s = document.getElementById('c3'), L = 300, R = 860, T = 10, rh = 40, x0 = -4.6, x1 = 3;
+  const x = v => L + (v - x0) / (x1 - x0) * (R - L);
+  [-4, -3, -2, -1, 0, 1, 2, 3].forEach(t => { el(s, 'line', { x1: x(t), x2: x(t), y1: T, y2: T + rows.length * rh, class: t ? 'gridline' : 'zero' }); el(s, 'text', { x: x(t), y: T + rows.length * rh + 18, 'text-anchor': 'middle', class: 'muted' }, fmt(t, 0)); });
+  rows.forEach(([n, v, lo, hi, c], i) => {
+    const y = T + i * rh + 8, h = rh - 16, col = css(c);
+    el(s, 'text', { x: L - 12, y: y + h / 2 + 4, 'text-anchor': 'end', class: i < 2 ? 'strong' : '' }, n);
+    el(s, 'rect', { x: Math.min(x(0), x(v)), y, width: Math.abs(x(v) - x(0)), height: h, rx: 4, fill: col });
+    el(s, 'line', { x1: x(lo), x2: x(hi), y1: y + h / 2, y2: y + h / 2, stroke: css('--text-primary'), 'stroke-width': 1.5, opacity: .6 });
+    el(s, 'text', { x: v < 0 ? x(lo) - 6 : x(hi) + 6, y: y + h / 2 + 4, 'text-anchor': v < 0 ? 'end' : 'start', class: 'strong' }, fmt(v) + ' pp');
+    hover(el(s, 'rect', { x: 0, y: y - 8, width: 940, height: rh, class: 'hit' }), `<b>${n}</b><br>${fmt(v)} pp<br>IC 95%: ${fmt(lo)} a ${fmt(hi)}`);
+  });
+})();
+
+// 4. Exposição: taxas brutas
+(() => {
+  const rows = [
+    ['Não atende nenhum dos dois', 33.53, 242345, '--neutral'],
+    ['Só o partido que sai (placebo)', 36.76, 194674, '--s3'],
+    ['Só o partido que entra (ponte)', 36.12, 138909, '--s1'],
+    ['Os dois partidos', 43.02, 375648, '--neutral'],
+  ];
+  const s = document.getElementById('c4'), L = 300, R = 860, T = 10, rh = 40, x = v => L + v / 50 * (R - L);
+  [0, 10, 20, 30, 40, 50].forEach(t => { el(s, 'line', { x1: x(t), x2: x(t), y1: T, y2: T + 4 * rh, class: 'gridline' }); el(s, 'text', { x: x(t), y: T + 4 * rh + 18, 'text-anchor': 'middle', class: 'muted' }, t + '%'); });
+  rows.forEach(([n, v, k, c], i) => {
+    const y = T + i * rh + 8, h = rh - 16;
+    el(s, 'text', { x: L - 12, y: y + h / 2 + 4, 'text-anchor': 'end', class: (i === 1 || i === 2) ? 'strong' : '' }, n);
+    el(s, 'rect', { x: L, y, width: x(v) - L, height: h, rx: 4, fill: css(c) });
+    el(s, 'text', { x: x(v) + 8, y: y + h / 2 + 4, class: 'strong' }, fmtp(v));
+    hover(el(s, 'rect', { x: 0, y: y - 8, width: 940, height: rh, class: 'hit' }), `<b>${n}</b><br>Continuam (bruto): ${fmtp(v)}<br>${k.toLocaleString('pt-BR')} ligações`);
+  });
+})();
+
+// 5. Robustez: coeficiente "muda prefeito e partido"
+forest('c5', [
+  { rot: 'M3 · efeitos fixos simples', v: -2.253, lo: -2.820, hi: -1.686 },
+  { rot: 'M4 · fornecedor × transição (principal)', v: -2.289, lo: -2.771, hi: -1.808, forte: 1, cor: css('--s2') },
+  { rot: 'M4 sem a transição de 2012', v: -2.485, lo: -3.124, hi: -1.846 },
+  { rot: 'Último ano → 1º ano do mandato seguinte (J4)', v: -5.726, lo: -6.447, hi: -5.005 },
+  { rot: 'Último ano → anos 2 a 4 (J4)', v: -4.868, lo: -5.530, hi: -4.206 },
+  { rot: 'Último ano → qualquer ano do mandato (J4)', v: -5.599, lo: -6.261, hi: -4.937 },
+  { rot: 'Interação (ambos − soma dos isolados), M4', v: -2.499, lo: -3.552, hi: -1.447, cor: css('--neutral') },
+], -7, 1, [-7, -6, -5, -4, -3, -2, -1, 0, 1], 340);
+</script>
+</body>
+</html>

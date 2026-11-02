@@ -1,0 +1,8 @@
+{
+  "sha256_fonte": "8182817671f86bc35bcf2d6d1e079b877ec01fb01958a4b0bb8829c043b870f7",
+  "n_amostra": 5557,
+  "novo_discorda": 0,
+  "antigo_discorda": 0,
+  "consulta": "SELECT count(*) AS n,count(*) FILTER (p.atende_partido_novo<>EXISTS (SELECT 1 FROM a JOIN m USING(eleicao,codigo_ibge) WHERE a.raiz=p.raiz AND a.eleicao=p.eleicao AND a.codigo_ibge<>p.codigo_ibge AND m.partido_inicio=p.partido_depois AND m.n_suplementares=0 AND NOT EXISTS (SELECT 1 FROM eventos e WHERE e.codigo_ibge=a.codigo_ibge AND e.eleicao=a.eleicao)\n AND NOT EXISTS (SELECT 1 FROM suspeitos s WHERE s.codigo_ibge=a.codigo_ibge AND s.eleicao=a.eleicao)\n AND NOT EXISTS (SELECT 1 FROM antigo t JOIN re USING(codigo_ibge) WHERE t.eleicao_transicao=2016 AND NOT t.mesmo_prefeito AND a.eleicao=2012 AND a.codigo_ibge=t.codigo_ibge))) AS novo_discorda,\n count(*) FILTER (p.atende_partido_antigo<>EXISTS (SELECT 1 FROM a JOIN m USING(eleicao,codigo_ibge) WHERE a.raiz=p.raiz AND a.eleicao=p.eleicao AND a.codigo_ibge<>p.codigo_ibge AND m.partido_inicio=p.partido_antes AND m.n_suplementares=0 AND NOT EXISTS (SELECT 1 FROM eventos e WHERE e.codigo_ibge=a.codigo_ibge AND e.eleicao=a.eleicao)\n AND NOT EXISTS (SELECT 1 FROM suspeitos s WHERE s.codigo_ibge=a.codigo_ibge AND s.eleicao=a.eleicao)\n AND NOT EXISTS (SELECT 1 FROM antigo t JOIN re USING(codigo_ibge) WHERE t.eleicao_transicao=2016 AND NOT t.mesmo_prefeito AND a.eleicao=2012 AND a.codigo_ibge=t.codigo_ibge))) AS antigo_discorda FROM checar p",
+  "metodo": "EXISTS com outro município explícito; status ordinário recontado no CSV bruto"
+}

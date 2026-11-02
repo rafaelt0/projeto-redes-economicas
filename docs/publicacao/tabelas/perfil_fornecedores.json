@@ -1,0 +1,597 @@
+{
+ "total": {
+  "arestas": 1951293,
+  "fornecedores": 468546,
+  "fornecedores_mandato": 712461,
+  "valor_bi": 313.717821,
+  "mediana_clientes": 1.0,
+  "parcela_um_cliente": 0.626716,
+  "parcela_baixada": 0.256497,
+  "municipios": 635
+ },
+ "por_mandato": [
+  {
+   "eleicao": 2008,
+   "fornecedores": 239325,
+   "valor_bi": 80.36728,
+   "arestas": 669557
+  },
+  {
+   "eleicao": 2012,
+   "fornecedores": 229043,
+   "valor_bi": 103.266969,
+   "arestas": 614943
+  },
+  {
+   "eleicao": 2016,
+   "fornecedores": 244093,
+   "valor_bi": 130.083573,
+   "arestas": 666793
+  }
+ ],
+ "clientes": [
+  {
+   "faixa": "1",
+   "ordem": 1,
+   "fornecedores": 446511,
+   "arestas": 446511,
+   "valor_bi": 64.520159,
+   "taxa_continua": 0.323385
+  },
+  {
+   "faixa": "2",
+   "ordem": 2,
+   "fornecedores": 110562,
+   "arestas": 201401,
+   "valor_bi": 28.254918,
+   "taxa_continua": 0.332123
+  },
+  {
+   "faixa": "3-5",
+   "ordem": 3,
+   "fornecedores": 91528,
+   "arestas": 302193,
+   "valor_bi": 50.453907,
+   "taxa_continua": 0.349978
+  },
+  {
+   "faixa": "6-10",
+   "ordem": 6,
+   "fornecedores": 35329,
+   "arestas": 238696,
+   "valor_bi": 57.147776,
+   "taxa_continua": 0.371452
+  },
+  {
+   "faixa": "11-50",
+   "ordem": 11,
+   "fornecedores": 25348,
+   "arestas": 450782,
+   "valor_bi": 77.870613,
+   "taxa_continua": 0.393155
+  },
+  {
+   "faixa": "51+",
+   "ordem": 51,
+   "fornecedores": 3183,
+   "arestas": 311710,
+   "valor_bi": 35.470448,
+   "taxa_continua": 0.490706
+  }
+ ],
+ "secoes": [
+  {
+   "letra": "G",
+   "secao": "Comércio (inclui veículos e peças)",
+   "fornecedores": 310787,
+   "valor_bi": 64.904523,
+   "arestas": 996964,
+   "taxa_continua": 0.4058
+  },
+  {
+   "letra": "C",
+   "secao": "Indústria de transformação",
+   "fornecedores": 74621,
+   "valor_bi": 14.920559,
+   "arestas": 226856,
+   "taxa_continua": 0.342618
+  },
+  {
+   "letra": "N",
+   "secao": "Administrativas e serviços complementares",
+   "fornecedores": 47815,
+   "valor_bi": 24.114004,
+   "arestas": 117725,
+   "taxa_continua": 0.317197
+  },
+  {
+   "letra": "F",
+   "secao": "Construção",
+   "fornecedores": 46521,
+   "valor_bi": 62.907928,
+   "arestas": 89722,
+   "taxa_continua": 0.335681
+  },
+  {
+   "letra": "M",
+   "secao": "Profissionais, científicas e técnicas",
+   "fornecedores": 31899,
+   "valor_bi": 13.667848,
+   "arestas": 79378,
+   "taxa_continua": 0.346242
+  },
+  {
+   "letra": "Q",
+   "secao": "Saúde e serviços sociais",
+   "fornecedores": 30034,
+   "valor_bi": 50.298695,
+   "arestas": 69151,
+   "taxa_continua": 0.408194
+  },
+  {
+   "letra": "I",
+   "secao": "Alojamento e alimentação",
+   "fornecedores": 28708,
+   "valor_bi": 7.152032,
+   "arestas": 46548,
+   "taxa_continua": 0.271161
+  },
+  {
+   "letra": "S",
+   "secao": "Outros serviços",
+   "fornecedores": 28442,
+   "valor_bi": 9.25909,
+   "arestas": 59088,
+   "taxa_continua": 0.411386
+  },
+  {
+   "letra": "P",
+   "secao": "Educação",
+   "fornecedores": 26090,
+   "valor_bi": 7.158924,
+   "arestas": 59687,
+   "taxa_continua": 0.316417
+  },
+  {
+   "letra": "H",
+   "secao": "Transporte e correio",
+   "fornecedores": 24168,
+   "valor_bi": 17.575393,
+   "arestas": 44226,
+   "taxa_continua": 0.366617
+  },
+  {
+   "letra": "R",
+   "secao": "Artes, cultura e esporte",
+   "fornecedores": 19915,
+   "valor_bi": 2.309218,
+   "arestas": 51375,
+   "taxa_continua": 0.27453
+  },
+  {
+   "letra": "J",
+   "secao": "Informação e comunicação",
+   "fornecedores": 17957,
+   "valor_bi": 8.982804,
+   "arestas": 60317,
+   "taxa_continua": 0.40763
+  },
+  {
+   "letra": "A",
+   "secao": "Agropecuária",
+   "fornecedores": 13423,
+   "valor_bi": 0.432222,
+   "arestas": 17217,
+   "taxa_continua": 0.289249
+  },
+  {
+   "letra": "L",
+   "secao": "Imobiliárias",
+   "fornecedores": 4959,
+   "valor_bi": 1.859512,
+   "arestas": 9111,
+   "taxa_continua": 0.37987
+  },
+  {
+   "letra": "K",
+   "secao": "Financeiras e seguros",
+   "fornecedores": 2856,
+   "valor_bi": 3.007105,
+   "arestas": 12821,
+   "taxa_continua": 0.449419
+  },
+  {
+   "letra": "E",
+   "secao": "Coleta de lixo e resíduos",
+   "fornecedores": 1933,
+   "valor_bi": 24.431549,
+   "arestas": 4989,
+   "taxa_continua": 0.520946
+  },
+  {
+   "letra": "B",
+   "secao": "Indústrias extrativas",
+   "fornecedores": 1079,
+   "valor_bi": 0.510599,
+   "arestas": 4237,
+   "taxa_continua": 0.509323
+  },
+  {
+   "letra": "T",
+   "secao": "Serviços domésticos",
+   "fornecedores": 545,
+   "valor_bi": 0.007793,
+   "arestas": 589,
+   "taxa_continua": 0.322581
+  },
+  {
+   "letra": "O",
+   "secao": "Administração pública",
+   "fornecedores": 398,
+   "valor_bi": 0.051558,
+   "arestas": 971,
+   "taxa_continua": 0.514933
+  },
+  {
+   "letra": null,
+   "secao": "Sem CNAE",
+   "fornecedores": 303,
+   "valor_bi": 0.15983,
+   "arestas": 312,
+   "taxa_continua": 0.192308
+  },
+  {
+   "letra": "U",
+   "secao": "Organismos internacionais",
+   "fornecedores": 8,
+   "valor_bi": 0.006635,
+   "arestas": 9,
+   "taxa_continua": 0.0
+  }
+ ],
+ "divisoes": [
+  {
+   "divisao": "47",
+   "fornecedores": 210453,
+   "valor_bi": 27.108781,
+   "nome": "Comércio varejista"
+  },
+  {
+   "divisao": "45",
+   "fornecedores": 68118,
+   "valor_bi": 7.262849,
+   "nome": "Comércio e reparação de veículos e peças"
+  },
+  {
+   "divisao": "46",
+   "fornecedores": 32216,
+   "valor_bi": 30.532893,
+   "nome": "Comércio atacadista"
+  },
+  {
+   "divisao": "43",
+   "fornecedores": 31821,
+   "valor_bi": 10.035401,
+   "nome": "Serviços especializados de construção"
+  },
+  {
+   "divisao": "85",
+   "fornecedores": 26090,
+   "valor_bi": 7.158924,
+   "nome": "Educação"
+  },
+  {
+   "divisao": "86",
+   "fornecedores": 25703,
+   "valor_bi": 46.12326,
+   "nome": "Atenção à saúde humana"
+  },
+  {
+   "divisao": "82",
+   "fornecedores": 23264,
+   "valor_bi": 5.471962,
+   "nome": "Serviços de escritório e apoio administrativo"
+  },
+  {
+   "divisao": "56",
+   "fornecedores": 22185,
+   "valor_bi": 6.99913,
+   "nome": "Alimentação"
+  },
+  {
+   "divisao": "49",
+   "fornecedores": 20189,
+   "valor_bi": 16.990972,
+   "nome": "Transporte terrestre"
+  },
+  {
+   "divisao": "90",
+   "fornecedores": 12840,
+   "valor_bi": 1.453286,
+   "nome": "Atividades artísticas e de espetáculos"
+  },
+  {
+   "divisao": "01",
+   "fornecedores": 12672,
+   "valor_bi": 0.404027,
+   "nome": "Agricultura e pecuária"
+  },
+  {
+   "divisao": "94",
+   "fornecedores": 12546,
+   "valor_bi": 8.551683,
+   "nome": "Organizações associativas"
+  },
+  {
+   "divisao": "41",
+   "fornecedores": 10947,
+   "valor_bi": 27.674387,
+   "nome": "Construção de edifícios"
+  },
+  {
+   "divisao": "25",
+   "fornecedores": 10631,
+   "valor_bi": 0.633002,
+   "nome": "Produtos de metal"
+  },
+  {
+   "divisao": "77",
+   "fornecedores": 10343,
+   "valor_bi": 6.240298,
+   "nome": "Aluguéis não imobiliários"
+  }
+ ],
+ "natureza": [
+  {
+   "natureza": "Sociedade limitada",
+   "fornecedores": 378957,
+   "valor_bi": 212.07508
+  },
+  {
+   "natureza": "Empresário individual (inclui MEI)",
+   "fornecedores": 281668,
+   "valor_bi": 14.595507
+  },
+  {
+   "natureza": "Associação, fundação ou OS",
+   "fornecedores": 26897,
+   "valor_bi": 53.896048
+  },
+  {
+   "natureza": "Outras",
+   "fornecedores": 14449,
+   "valor_bi": 6.405156
+  },
+  {
+   "natureza": "EIRELI ou unipessoal",
+   "fornecedores": 4811,
+   "valor_bi": 1.539404
+  },
+  {
+   "natureza": "Sociedade anônima",
+   "fornecedores": 4240,
+   "valor_bi": 22.830735
+  },
+  {
+   "natureza": "Cooperativa",
+   "fornecedores": 1388,
+   "valor_bi": 2.223216
+  },
+  {
+   "natureza": "Sem cadastro",
+   "fornecedores": 51,
+   "valor_bi": 0.152676
+  }
+ ],
+ "porte": [
+  {
+   "porte": "Microempresa",
+   "fornecedores": 483713,
+   "valor_bi": 34.872575
+  },
+  {
+   "porte": "Demais",
+   "fornecedores": 121050,
+   "valor_bi": 236.423713
+  },
+  {
+   "porte": "Pequeno porte",
+   "fornecedores": 107647,
+   "valor_bi": 42.268857
+  },
+  {
+   "porte": "Não informado",
+   "fornecedores": 51,
+   "valor_bi": 0.152676
+  }
+ ],
+ "concentracao": {
+  "top1": 0.7288,
+  "top10": 0.948584,
+  "metade_menor": 0.00357,
+  "mediana_valor": 9500.0
+ },
+ "maiores": [
+  {
+   "raiz": "61699567",
+   "valor_bi": 4.224389,
+   "max_clientes": 16,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SPDM-ASSOCIAÇÃO PAULISTA P/ DESENVOLV.DA MEDICINA"
+  },
+  {
+   "raiz": "47497367",
+   "valor_bi": 3.764294,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "TERRACOM CONSTRUCOES LTDA"
+  },
+  {
+   "raiz": "53437315",
+   "valor_bi": 1.498787,
+   "max_clientes": 251,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "COMERCIAL JOAO AFONSO LTDA"
+  },
+  {
+   "raiz": "06291846",
+   "valor_bi": 1.444265,
+   "max_clientes": 194,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "CONSTROESTE CONSTRUTORA E PARTICIPACOES LTDA"
+  },
+  {
+   "raiz": "24232886",
+   "valor_bi": 1.357902,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "PRO SAUDE - ASSOCIACAO BENEF DE ASSITENCIA SOCIAL"
+  },
+  {
+   "raiz": "60924040",
+   "valor_bi": 1.318606,
+   "max_clientes": 13,
+   "mandatos": 3,
+   "secao": "Administrativas e serviços complementares",
+   "natureza": "Sociedade anônima",
+   "nome": "TB SERVICOS TRANSP LIMP GERENC REC HUMANOS LTDA"
+  },
+  {
+   "raiz": "46020301",
+   "valor_bi": 1.282789,
+   "max_clientes": 14,
+   "mandatos": 3,
+   "secao": "Educação",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SOCIEDADE CAMPINEIRA DE EDUCAÇÃO  E INSTRUÇÃO - SCEI"
+  },
+  {
+   "raiz": "10541089",
+   "valor_bi": 1.156022,
+   "max_clientes": 27,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade anônima",
+   "nome": "ESTRE SPI AMBIENTAL S/A"
+  },
+  {
+   "raiz": "49254634",
+   "valor_bi": 1.155346,
+   "max_clientes": 14,
+   "mandatos": 3,
+   "secao": "Alojamento e alimentação",
+   "natureza": "Sociedade anônima",
+   "nome": "NUTRIPLUS ALIMENTACAO E TECNOLOGIA LTDA"
+  },
+  {
+   "raiz": "62162847",
+   "valor_bi": 1.131592,
+   "max_clientes": 24,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "JOFEGE PAVIMENTACAO E CONSTRUCAO LTDA"
+  },
+  {
+   "raiz": "55996615",
+   "valor_bi": 1.098103,
+   "max_clientes": 15,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "CONSLADEL CONSTRUTORA E LACOS DETETORES E ELETRO-NICA LTDA"
+  },
+  {
+   "raiz": "62011788",
+   "valor_bi": 1.051631,
+   "max_clientes": 12,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "LITUCERA LIMPEZA E ENGENHARIA LTDA"
+  },
+  {
+   "raiz": "73188336",
+   "valor_bi": 1.021135,
+   "max_clientes": 22,
+   "mandatos": 3,
+   "secao": "Construção",
+   "natureza": "Sociedade limitada",
+   "nome": "PROVENCE CONSTRUTORA LTDA"
+  },
+  {
+   "raiz": "31733363",
+   "valor_bi": 0.993311,
+   "max_clientes": 10,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "CORPUS SANEAMENTO E OBRAS LTDA"
+  },
+  {
+   "raiz": "46044368",
+   "valor_bi": 0.936506,
+   "max_clientes": 4,
+   "mandatos": 3,
+   "secao": "Saúde e serviços sociais",
+   "natureza": "Associação, fundação ou OS",
+   "nome": "SERVIÇO DE SAÚDE DR. CÂNDIDO FERREIRA"
+  },
+  {
+   "raiz": "03829424",
+   "valor_bi": 0.919476,
+   "max_clientes": 16,
+   "mandatos": 3,
+   "secao": "Educação",
+   "natureza": "Sociedade limitada",
+   "nome": "PLANETA EDUCACAO GRAFICA E EDITORA LTDA"
+  },
+  {
+   "raiz": "09294054",
+   "valor_bi": 0.863797,
+   "max_clientes": 1,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade anônima",
+   "nome": "ECOOSASCO AMBIENTAL S A"
+  },
+  {
+   "raiz": "08528442",
+   "valor_bi": 0.83413,
+   "max_clientes": 436,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "NUTRICIONALE COMERCIO DE ALIMENTOS LTDA"
+  },
+  {
+   "raiz": "67729178",
+   "valor_bi": 0.820212,
+   "max_clientes": 574,
+   "mandatos": 3,
+   "secao": "Comércio (inclui veículos e peças)",
+   "natureza": "Sociedade limitada",
+   "nome": "COMERCIAL CIRURGICA RIOCLARENSE LTDA"
+  },
+  {
+   "raiz": "50668722",
+   "valor_bi": 0.818718,
+   "max_clientes": 15,
+   "mandatos": 3,
+   "secao": "Coleta de lixo e resíduos",
+   "natureza": "Sociedade limitada",
+   "nome": "PROACTIVA MEIO AMBIENTE BRASIL LTDA"
+  }
+ ],
+ "nota": "Fornecedor-mandato = raiz do CNPJ x mandato (2009-12, 2013-16, 2017-20). Valores nominais em R$ bilhões. Porte e natureza do cadastro da Receita de 2026-10."
+}

@@ -1,0 +1,20 @@
+modelo,status,motivo,n_selecionadas,n,n_singletons_descartados,n_municipios,n_fornecedores,posto_fe_limite,posto_regressores,n_regressores,gl_t
+M1_alternancia,estimado,,1951293,1951293,0,635,468546,1097,1,1,634
+M2_trocas_separadas,estimado,,1951293,1951293,0,635,468546,1097,2,2,634
+M3_quatro_transicoes,estimado,,1951293,1951293,0,635,468546,1097,3,3,634
+M4_fornecedor_transicao,estimado,,1951293,1483468,467825,635,155440,245270,5,5,634
+E1_exposicoes,estimado,,951576,951574,2,598,154063,1587,5,5,597
+E2_exposicoes_fornecedor_transicao,estimado,,951576,874506,77070,598,108432,165061,5,5,597
+J3_primeiro,estimado,,862038,862038,0,635,261229,1093,3,3,634
+J4_primeiro,estimado,,862038,595822,266216,635,74406,111705,5,5,634
+J3_anos_2_4,estimado,,862038,862038,0,635,261229,1093,3,3,634
+J4_anos_2_4,estimado,,862038,595822,266216,635,74406,111705,5,5,634
+J3_mandato,estimado,,862038,862038,0,635,261229,1093,3,3,634
+J4_mandato,estimado,,862038,595822,266216,635,74406,111705,5,5,634
+D1_perdeu,estimado,,1951293,1951293,0,635,468546,1097,1,1,634
+D4_perdeu,estimado,,1951293,1483468,467825,635,155440,245270,5,5,634
+D1_saiu,estimado,,1951293,1951293,0,635,468546,1097,1,1,634
+D4_saiu,nao_identificado,Desfecho absorvido integralmente pelos efeitos fixos,1951293,,,,,,,,
+S4_sem2012,estimado,,1281736,965529,316207,608,115911,157536,5,5,607
+SE2_sem2012,estimado,,619275,569243,50032,553,80447,105455,5,5,552
+SE2_sem_ambiguos,estimado,,538502,473082,65420,598,98458,130930,5,5,597

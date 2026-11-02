@@ -1,0 +1,27 @@
+{
+  "sha256_fonte": "8182817671f86bc35bcf2d6d1e079b877ec01fb01958a4b0bb8829c043b870f7",
+  "n": 1951293,
+  "modelos": [
+    "M1_alternancia",
+    "M2_trocas_separadas",
+    "M3_quatro_transicoes",
+    "M4_fornecedor_transicao",
+    "E1_exposicoes",
+    "E2_exposicoes_fornecedor_transicao",
+    "J3_primeiro",
+    "J4_primeiro",
+    "J3_anos_2_4",
+    "J4_anos_2_4",
+    "J3_mandato",
+    "J4_mandato",
+    "D1_perdeu",
+    "D4_perdeu",
+    "D1_saiu",
+    "D4_saiu",
+    "S4_sem2012",
+    "SE2_sem2012",
+    "SE2_sem_ambiguos"
+  ],
+  "replica_bootstrap": 1999,
+  "protocolo": "docs/protocolo-publicacao.md"
+}

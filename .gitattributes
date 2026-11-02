@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# O módulo csv grava CRLF em qualquer sistema; sem conversão, os bytes ficam iguais aos gerados.
+*.csv -text
+*.png binary
+*.parquet binary
+*.zip binary
