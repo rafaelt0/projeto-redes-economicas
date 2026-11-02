@@ -24,6 +24,9 @@ class Comparacao(unittest.TestCase):
     def test_texto_diferente_falha(self):
         self.assertTrue(self.comparar('{"modelo": "M4"}', '{"modelo": "M5"}', 't.json'))
 
+    def test_sha256_dos_bytes_nao_e_comparado(self):
+        self.assertEqual(self.comparar('{"sha256_fonte": "aa", "n": 1}', '{"sha256_fonte": "bb", "n": 1}', 't.json'), [])
+
     def test_fim_de_linha_nao_importa(self):
         self.assertEqual(self.comparar('a\r\nb\r\n', 'a\nb\n', 't.md'), [])
 

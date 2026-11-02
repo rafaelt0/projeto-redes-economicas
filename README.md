@@ -51,8 +51,10 @@ com `resultados iguais aos do repositório` ou com a lista do que mudou.
 - `uv run reproduzir.py testes` roda só os testes, sem dados, em segundos.
 
 A comparação aceita diferenças a partir do nono algarismo significativo, que surgem porque a álgebra linear muda
-de biblioteca entre sistemas. No Linux, as saídas saem idênticas byte a byte, figuras inclusive. As figuras não
-são comparadas em outros sistemas, porque a renderização das fontes muda.
+de biblioteca entre sistemas. No Linux, tabelas e figuras em SVG saem idênticas byte a byte. As figuras não entram
+na comparação, porque a renderização das fontes muda de uma máquina para outra. Os campos `sha256_*` das tabelas
+registram os bytes do Parquet da amostra auditada, que o DuckDB grava de forma diferente em cada sistema; no lugar
+deles, o comando confere um hash do conteúdo da amostra.
 
 ## O que cada etapa faz
 

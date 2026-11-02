@@ -45,6 +45,10 @@ SAIDAS = ['docs/publicacao/tabelas/*.csv', 'docs/publicacao/tabelas/*.json', 'do
     'docs/publicacao/amostra-auditada.json', 'docs/publicacao/manifesto-resultados.json',
     'docs/publicacao/fornecedores.html', 'docs/resultados-decomposicao.md', 'relatorios/relatorio_regioes.md']
 TOLERANCIA = 1e-9
+# Os campos sha256_* guardam os bytes do Parquet da amostra auditada, que o DuckDB grava diferente em cada sistema.
+# No lugar deles, confere-se o conteúdo: linhas e soma dos hashes das linhas (codigo/hash_conteudo.py).
+AMOSTRA = 'dados/limpos/publicacao/permanencia_auditada.parquet'
+CONTEUDO_AMOSTRA = '1951293\t17994727645686744520968732'
 # -X utf8: console em UTF-8 também no Windows, onde o padrão para pipes é cp1252 (o -I ignora PYTHONIOENCODING).
 PYTHON = [sys.executable, '-I', '-X', 'utf8']
 
@@ -91,7 +95,8 @@ def diferenca(a, b, onde=''):
     if isinstance(a, dict) and isinstance(b, dict):
         if a.keys() != b.keys():
             return f'{onde}: chaves {sorted(a.keys() ^ b.keys())}'
-        return next((d for k in a if (d := diferenca(a[k], b[k], f'{onde}/{k}'))), None)
+        return next((d for k in a if not k.startswith('sha256') and (d := diferenca(a[k], b[k], f'{onde}/{k}'))),
+            None)
     if isinstance(a, list) and isinstance(b, list):
         if len(a) != len(b):
             return f'{onde}: {len(a)} itens no repositório, {len(b)} gerados'
@@ -141,6 +146,10 @@ def main():
             print(f'== {etapa}', flush=True)
             subprocess.run(PYTHON + [f'codigo/{etapa}.py'], cwd=RAIZ, check=True)
         diferentes = comparar(referencia, RAIZ, arquivos)
+    conteudo = subprocess.run(PYTHON + ['codigo/hash_conteudo.py', AMOSTRA], cwd=RAIZ, check=True, capture_output=True,
+        text=True, encoding='utf-8').stdout.rsplit('\t', 1)[0]
+    if conteudo != CONTEUDO_AMOSTRA:
+        diferentes.append(f'{AMOSTRA}: conteúdo {conteudo!r}, esperado {CONTEUDO_AMOSTRA!r}')
     if diferentes:
         print('Diferenças em relação às saídas do repositório:', *diferentes, sep='\n  ')
         raise SystemExit(1)
